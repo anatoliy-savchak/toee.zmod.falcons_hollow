@@ -1,0 +1,15 @@
+# initial talk
+{1}{[Commander Karef addresses you:] 
+Brave knights, I thank you for answering my call so quickly. I need you to conduct an investigation.}{[Commander Karef addresses you:] 
+Brave knights, I thank you for answering my call so quickly. I need you to conduct an investigation.}{}{}{}{ctrl(npc).dialog_initial_started(npc)}
+{2}{Continue}{}{1}{}{10}{}
+
+{10}{Our agent in Corinth, Constello, has ceased to answer my messages. You must find out why. Go to Corinth, find out what is happening, and resolve the problem.}{Our agent in Corinth, Constello, has ceased to answer my messages. You must find out why. Go to Corinth, find out what is happening, and resolve the problem.}{}{}{}{}
+{12}{Continue}{}{1}{}{20}{}
+
+{20}{I am afraid I can not help you more, as I have other matter to attend to. You are on yout onwn in this mission. Good luck!}{I am afraid I can not help you more, as I have other matter to attend to. You are on yout onwn in this mission. Good luck!}{}{}{}{}
+{22}{Proceed.}{}{1}{}{0}{}
+
+# returning talk before next stage
+{100}{Please go and find out what happened to Constello. You may also wish to visit the caves to the south-west to practice your combat skills.}{Please go and find out what happened to Constello. You may also wish to visit the caves to the south-west to practice your combat skills.}{}{}{}{ctrl(npc).dialog_rumor_swcaves_informed(npc)}
+{101}{Okay.}{}{1}{}{0}{}

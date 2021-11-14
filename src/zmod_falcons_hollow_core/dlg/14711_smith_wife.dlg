@@ -1,0 +1,17 @@
+# Dwarf Wife
+{1}{Welcome, friends. I am @npcname@, the quartermaster. I can sell you weapons and armor. Are you interested?}{Welcome, friends. I am @npcname@, the quartermaster. I can sell you weapons and armor. Are you interested?}{}{}{}{}
+{2}{Yes, please show us your wares.}{}{1}{}{1000}{}
+{3}{Can I have a store-room key?}{}{1}{}{10}{}
+{4}{E:}{}{1}{}{0}{}
+
+{100}{Yes?}{Yes?}{}{}{}{}
+{101}{Trade please!}{}{1}{}{1100}{}
+{102}{F:}{}{1}{}{0}{}
+
+
+{1100}{Barter options:}{Barter options:}{}{}{}{}
+{1101}{B: Sell}{}{1}{}{0}{utils_item.barter_sell(npc)}
+{1102}{B: Buy Armor}{}{1}{}{0}{utils_item.barter_list(npc, const_proto_list_armor.PROTOS_ARMOR_AND_SHIELDS)}
+{1104}{B: Buy Masterwork Armor}{}{1}{}{0}{utils_item.barter_list(npc, const_proto_list_armor.PROTOS_ARMOR_AND_SHIELDS_MASTERWORK)}
+{1105}{B: Buy Magic Armor}{}{1}{}{0}{utils_item.barter_list(npc, const_proto_list_armor.PROTOS_ARMOR_AND_SHIELDS_MAGIC)}
+{1109}{E:}{}{1}{}{0}{}

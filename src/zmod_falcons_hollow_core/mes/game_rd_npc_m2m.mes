@@ -1,0 +1,16 @@
+
+// This section is for RUMORS in the game.
+// these start at 0 and each new rumor is on a multiple of 10
+// the first message is the logbook message
+// the second message is the rumor as told by an NPC in dialog
+
+// 0 {Karef mentioned a cave complex to the south-west. He said that we could practice our combat skills there.}
+// 10 {Shania, the apprentice of Master Wizard Quoris at the Keep, told us that we should go to her if we find coded messages. She may be able to help.}
+// Story State 0
+
+{0} {There is cave complex to the south-west.}
+{1} {}
+
+{10} {Shania at the Keep can decipher messages.}
+{11} {}
+

@@ -1,0 +1,365 @@
+; portraits.mes
+; default path = "art\\interface\\portraits\\"
+; ---
+; .mes is broken down as follows:
+; (0000-0499) = temp/gnome portraits
+; (0500-0999) = human portraits
+; (1000-1499) = elf portraits
+; (1500-1999) = half-elf portraits
+; (2000-2499) = dwarf portraits
+; (2500-2999) = halfling portraits
+; (3000-3499) = half-orc portraits
+; (3500-5999) = monster portraits
+; (6000-....) = NPC portraits
+; ---
+; filename format as follows:
+; [32-bit] .tga
+
+; (race)(gender)_(number)_(size)_(desc)_(grey).tga
+
+;    (race)
+;    HU  = human
+;    EL  = elf
+;    HE  = half-elf
+;    DW  = dwarf
+;    HA  = halfling
+;    HO  = half-orc
+;    GN  = gnome
+;    MOO = monster   (if they don't fit in any of the above categories)
+;    TMP = temporary
+;    NPC = Non-Player Characters
+
+;    (gender)
+;    M = male
+;    F = female
+;    O = other  (for monsters usually)
+
+;    (number)
+;    0000-9999
+
+;    (size)
+;    b = big   (for pc's, character sheets)
+;    s = small (for pc's and followers in status windows and monsters in bestiary)
+;    m = mini  (for monsters in combat/initiative)
+
+;    (desc)
+;    any text description (should be short and concise)
+
+;    (grey)
+;    if the picture is grey-scale (used for disabled/dead), add 'grey' at the end
+;    used only for "small" pictures
+
+;    [examples]
+;    HUF_0502_s_hot_chick_fighter.tga
+;    HOM_3000_b_angry_barbarian.tga
+;    MOO_3501_s_gelatinous_cube_grey.tga
+
+; --- start ---
+
+; temp/gnomes
+
+{0080} {BG_0010_b_female.tga}
+{0081} {BG_0011_m_female.tga}
+{0082} {BG_0012_s_female.tga}
+{0083} {BG_0013_s_female_grey.tga}
+{0084} {BG_0014_m_female_grey.tga}
+
+{0090} {BG_0020_b_female.tga}
+{0091} {BG_0021_m_female.tga}
+{0092} {BG_0022_s_female.tga}
+{0093} {BG_0023_s_female_grey.tga}
+{0094} {BG_0024_m_female_grey.tga}
+
+{0100} {BG_0030_b_female.tga}
+{0101} {BG_0031_m_female.tga}
+{0102} {BG_0032_s_female.tga}
+{0103} {BG_0033_s_female_grey.tga}
+{0104} {BG_0034_m_female_grey.tga}
+
+{0110} {BG_0040_b_female.tga}
+{0111} {BG_0041_m_female.tga}
+{0112} {BG_0042_s_female.tga}
+{0113} {BG_0043_s_female_grey.tga}
+{0114} {BG_0044_m_female_grey.tga}
+
+{0120} {BG_0050_b_female.tga}
+{0121} {BG_0051_m_female.tga}
+{0122} {BG_0052_s_female.tga}
+{0123} {BG_0053_s_female_grey.tga}
+{0124} {BG_0054_m_female_grey.tga}
+
+{0130} {BG_0060_b_female.tga}
+{0131} {BG_0061_m_female.tga}
+{0132} {BG_0062_s_female.tga}
+{0133} {BG_0063_s_female_grey.tga}
+{0134} {BG_0064_m_female_grey.tga}
+
+{0140} {BG_0070_b_female.tga}
+{0141} {BG_0071_m_female.tga}
+{0142} {BG_0072_s_female.tga}
+{0143} {BG_0073_s_female_grey.tga}
+{0144} {BG_0074_m_female_grey.tga}
+
+; humans
+
+{0780} {BG_0080_b_female.tga}
+{0781} {BG_0081_m_female.tga}
+{0782} {BG_0082_s_female.tga}
+{0783} {BG_0083_s_female_grey.tga}
+{0784} {BG_0084_m_female_grey.tga}
+
+{0790} {BG_0090_b_female.tga}
+{0791} {BG_0091_m_female.tga}
+{0792} {BG_0092_s_female.tga}
+{0793} {BG_0093_s_female_grey.tga}
+{0794} {BG_0094_m_female_grey.tga}
+
+{0800} {BG_0100_b_female.tga}
+{0801} {BG_0101_m_female.tga}
+{0802} {BG_0102_s_female.tga}
+{0803} {BG_0103_s_female_grey.tga}
+{0804} {BG_0104_m_female_grey.tga}
+
+{0810} {BG_0110_b_female.tga}
+{0811} {BG_0111_m_female.tga}
+{0812} {BG_0112_s_female.tga}
+{0813} {BG_0113_s_female_grey.tga}
+{0814} {BG_0114_m_female_grey.tga}
+
+{0820} {BG_0120_b_female.tga}
+{0821} {BG_0121_m_female.tga}
+{0822} {BG_0122_s_female.tga}
+{0823} {BG_0123_s_female_grey.tga}
+{0824} {BG_0124_m_female_grey.tga}
+
+{0830} {BG_0130_b_female.tga}
+{0831} {BG_0131_m_female.tga}
+{0832} {BG_0132_s_female.tga}
+{0833} {BG_0133_s_female_grey.tga}
+{0834} {BG_0134_m_female_grey.tga}
+
+{0840} {BG_0140_b_female.tga}
+{0841} {BG_0141_m_female.tga}
+{0842} {BG_0142_s_female.tga}
+{0843} {BG_0143_s_female_grey.tga}
+{0844} {BG_0144_m_female_grey.tga}
+
+; elves
+
+; half-elves
+
+{1520} {BG_0150_b_female.tga}
+{1521} {BG_0151_m_female.tga}
+{1522} {BG_0152_s_female.tga}
+{1523} {BG_0153_s_female_grey.tga}
+{1524} {BG_0154_m_female_grey.tga}
+
+{1530} {BG_0160_b_female.tga}
+{1531} {BG_0161_m_female.tga}
+{1532} {BG_0162_s_female.tga}
+{1533} {BG_0163_s_female_grey.tga}
+{1534} {BG_0164_m_female_grey.tga}
+
+{1540} {BG_0170_b_female.tga}
+{1541} {BG_0171_m_female.tga}
+{1542} {BG_0172_s_female.tga}
+{1543} {BG_0173_s_female_grey.tga}
+{1544} {BG_0174_m_female_grey.tga}
+
+{1550} {BG_0180_b_female.tga}
+{1551} {BG_0181_m_female.tga}
+{1552} {BG_0182_s_female.tga}
+{1553} {BG_0183_s_female_grey.tga}
+{1554} {BG_0184_m_female_grey.tga}
+
+{1560} {BG_0190_b_male.tga}
+{1561} {BG_0191_m_male.tga}
+{1562} {BG_0192_s_male.tga}
+{1563} {BG_0193_s_male_grey.tga}
+{1564} {BG_0194_m_male_grey.tga}
+
+{1570} {BG_0200_b_male.tga}
+{1571} {BG_0201_m_male.tga}
+{1572} {BG_0202_s_male.tga}
+{1573} {BG_0203_s_male_grey.tga}
+{1574} {BG_0204_m_male_grey.tga}
+
+{1580} {BG_0210_b_male.tga}
+{1581} {BG_0211_m_male.tga}
+{1582} {BG_0212_s_male.tga}
+{1583} {BG_0213_s_male_grey.tga}
+{1584} {BG_0214_m_male_grey.tga}
+
+{1590} {BG_0220_b_male.tga}
+{1591} {BG_0221_m_male.tga}
+{1592} {BG_0222_s_male.tga}
+{1593} {BG_0223_s_male_grey.tga}
+{1594} {BG_0224_m_male_grey.tga}
+
+{1600} {BG_0230_b_male.tga}
+{1601} {BG_0231_m_male.tga}
+{1602} {BG_0232_s_male.tga}
+{1603} {BG_0233_s_male_grey.tga}
+{1604} {BG_0234_m_male_grey.tga}
+
+{1610} {BG_0240_b_male.tga}
+{1611} {BG_0241_m_male.tga}
+{1612} {BG_0242_s_male.tga}
+{1613} {BG_0243_s_male_grey.tga}
+{1614} {BG_0244_m_male_grey.tga}
+
+{1620} {BG_0250_b_male.tga}
+{1621} {BG_0251_m_male.tga}
+{1622} {BG_0252_s_male.tga}
+{1623} {BG_0253_s_male_grey.tga}
+{1624} {BG_0254_m_male_grey.tga}
+
+{1630} {BG_0260_b_male.tga}
+{1631} {BG_0261_m_male.tga}
+{1632} {BG_0262_s_male.tga}
+{1633} {BG_0263_s_male_grey.tga}
+{1634} {BG_0264_m_male_grey.tga}
+
+{1640} {BG_0270_b_male.tga}
+{1641} {BG_0271_m_male.tga}
+{1642} {BG_0272_s_male.tga}
+{1643} {BG_0273_s_male_grey.tga}
+{1644} {BG_0274_m_male_grey.tga}
+
+{1650} {BG_0280_b_male.tga}
+{1651} {BG_0281_m_male.tga}
+{1652} {BG_0282_s_male.tga}
+{1653} {BG_0283_s_male_grey.tga}
+{1654} {BG_0284_m_male_grey.tga}
+
+; dwarves
+
+{2140} {BG_0290_b_male.tga}
+{2141} {BG_0291_m_male.tga}
+{2142} {BG_0292_s_male.tga}
+{2143} {BG_0293_s_male_grey.tga}
+{2144} {BG_0294_m_male_grey.tga}
+
+{2150} {BG_0300_b_male.tga}
+{2151} {BG_0301_m_male.tga}
+{2152} {BG_0302_s_male.tga}
+{2153} {BG_0303_s_male_grey.tga}
+{2154} {BG_0304_m_male_grey.tga}
+
+{2160} {BG_0310_b_male.tga}
+{2161} {BG_0311_m_male.tga}
+{2162} {BG_0312_s_male.tga}
+{2163} {BG_0313_s_male_grey.tga}
+{2164} {BG_0314_m_male_grey.tga}
+
+{2170} {BG_0320_b_male.tga}
+{2171} {BG_0321_m_male.tga}
+{2172} {BG_0322_s_male.tga}
+{2173} {BG_0323_s_male_grey.tga}
+{2174} {BG_0324_m_male_grey.tga}
+
+{2180} {BG_0330_b_male.tga}
+{2181} {BG_0331_m_male.tga}
+{2182} {BG_0332_s_male.tga}
+{2183} {BG_0333_s_male_grey.tga}
+{2184} {BG_0334_m_male_grey.tga}
+
+{2190} {BG_0340_b_male.tga}
+{2191} {BG_0341_m_male.tga}
+{2192} {BG_0342_s_male.tga}
+{2193} {BG_0343_s_male_grey.tga}
+{2194} {BG_0344_m_male_grey.tga}
+
+{2200} {BG_0350_b_male.tga}
+{2201} {BG_0351_m_male.tga}
+{2202} {BG_0352_s_male.tga}
+{2203} {BG_0353_s_male_grey.tga}
+{2204} {BG_0354_m_male_grey.tga}
+
+; halflings
+
+{2570} {BG_0360_b_male.tga}
+{2571} {BG_0361_m_male.tga}
+{2572} {BG_0362_s_male.tga}
+{2573} {BG_0363_s_male_grey.tga}
+{2574} {BG_0364_m_male_grey.tga}
+
+{2580} {BG_0370_b_male.tga}
+{2581} {BG_0371_m_male.tga}
+{2582} {BG_0372_s_male.tga}
+{2583} {BG_0373_s_male_grey.tga}
+{2584} {BG_0374_m_male_grey.tga}
+
+{2590} {BG_0380_b_male.tga}
+{2591} {BG_0381_m_male.tga}
+{2592} {BG_0382_s_male.tga}
+{2593} {BG_0383_s_male_grey.tga}
+{2594} {BG_0384_m_male_grey.tga}
+
+{2600} {BG_0390_b_male.tga}
+{2601} {BG_0391_m_male.tga}
+{2602} {BG_0392_s_male.tga}
+{2603} {BG_0393_s_male_grey.tga}
+{2604} {BG_0394_m_male_grey.tga}
+
+{2610} {BG_0400_b_male.tga}
+{2611} {BG_0401_m_male.tga}
+{2612} {BG_0402_s_male.tga}
+{2613} {BG_0403_s_male_grey.tga}
+{2614} {BG_0404_m_male_grey.tga}
+
+{2620} {BG_0410_b_male.tga}
+{2621} {BG_0411_m_male.tga}
+{2622} {BG_0412_s_male.tga}
+{2623} {BG_0413_s_male_grey.tga}
+{2624} {BG_0414_m_male_grey.tga}
+
+{2630} {BG_0420_b_male.tga}
+{2631} {BG_0421_m_male.tga}
+{2632} {BG_0422_s_male.tga}
+{2633} {BG_0423_s_male_grey.tga}
+{2634} {BG_0424_m_male_grey.tga}
+
+; half-orcs
+
+{3140} {BG_0430_b_male.tga}
+{3141} {BG_0431_m_male.tga}
+{3142} {BG_0432_s_male.tga}
+{3143} {BG_0433_s_male_grey.tga}
+{3144} {BG_0434_m_male_grey.tga}
+
+{3150} {BG_0440_b_male.tga}
+{3151} {BG_0441_m_male.tga}
+{3152} {BG_0442_s_male.tga}
+{3153} {BG_0443_s_male_grey.tga}
+{3154} {BG_0444_m_male_grey.tga}
+
+{3160} {BG_0450_b_male.tga}
+{3161} {BG_0451_m_male.tga}
+{3162} {BG_0452_s_male.tga}
+{3163} {BG_0453_s_male_grey.tga}
+{3164} {BG_0454_m_male_grey.tga}
+
+{3170} {BG_0460_b_male.tga}
+{3171} {BG_0461_m_male.tga}
+{3172} {BG_0462_s_male.tga}
+{3173} {BG_0463_s_male_grey.tga}
+{3174} {BG_0464_m_male_grey.tga}
+
+{3180} {BG_0470_b_male.tga}
+{3181} {BG_0471_m_male.tga}
+{3182} {BG_0472_s_male.tga}
+{3183} {BG_0473_s_male_grey.tga}
+{3184} {BG_0474_m_male_grey.tga}
+
+{3190} {BG_0480_b_male.tga}
+{3191} {BG_0481_m_male.tga}
+{3192} {BG_0482_s_male.tga}
+{3193} {BG_0483_s_male_grey.tga}
+{3194} {BG_0484_m_male_grey.tga}
+
+{3200} {BG_0490_b_male.tga}
+{3201} {BG_0491_m_male.tga}
+{3202} {BG_0492_s_male.tga}
+{3203} {BG_0493_s_male_grey.tga}
+{3204} {BG_0494_m_male_grey.tga}

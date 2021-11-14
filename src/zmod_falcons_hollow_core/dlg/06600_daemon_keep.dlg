@@ -1,0 +1,9 @@
+
+{10}{[As you make your way through the entrance hall, you are frozen in your tracks, as shouting erupts through the hall:] Orc Attack! Orc Attack!}{[As you make your way through the entrance hall, you are frozen in your tracks, as shouting erupts through the hall:] Orc Attack! Orc Attack!}{}{}{}{cs().display_encounter_k01()}
+{11}{[Join the battle]}{}{1}{}{}{cs().activate_encounter_k01();npc.destroy()}
+{15}{The party has defeated the orc raid! Eeach character gains 100 xp for each surviving allied guard!}{}{}{}{}{cs().display_encounter_k01()}
+
+
+{20}{Leaving Keep}{Leaving Keep}{}{}{}{}
+{21}{Don't leave}{}{1}{}{}{npc.destroy()}
+{22}{Travel to Corinth}{}{1}{}{}{npc.destroy(); cs().dialog_travel_corinth()}

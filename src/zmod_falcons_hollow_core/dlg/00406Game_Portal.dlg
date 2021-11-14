@@ -1,0 +1,10 @@
+{1}{The portal opens before you...}{The portal opens before you...}{}{}{}{game.particles( 'ef-NODE-Air portal', npc ); game.sound( 4008 ); game.global_flags[601] = 1; zmod_startup()}
+{2}{Begin adventuring Keep 1.}{Begin adventuring Keep 1.}{1}{}{0}{game.fade_and_teleport( 0, 0, 0, 5010, 498, 493)}
+{3}{Begin adventuring Keep 2.}{Begin adventuring Keep 2.}{1}{}{0}{game.fade_and_teleport( 0, 0, 0, module_consts.MAP_ID_ZMOD_KEEP_LV2, module_consts.ZMOD_KEEP_LV3_START_COORDS_AT_GAMBLER[0], module_consts.ZMOD_KEEP_LV3_START_COORDS_AT_GAMBLER[1])}
+{4}{Begin adventuring Keep 3.}{Begin adventuring Keep 3.}{1}{}{0}{game.fade_and_teleport( 0, 0, 0, module_consts.MAP_ID_ZMOD_KEEP_LV3, module_consts.ZMOD_KEEP_LV3_START_COORDS_AT_COMMANDERS[0], module_consts.ZMOD_KEEP_LV3_START_COORDS_AT_COMMANDERS[1])}
+{5}{Begin adventuring Corinth.}{Begin adventuring Corinth.}{1}{}{0}{game.fade_and_teleport( 0, 0, 0, module_consts.MAP_ID_ZMOD_CORINTH, module_consts.ZMOD_KEEP_LV3_ENTRY_COORDS1[0], module_consts.ZMOD_KEEP_LV3_ENTRY_COORDS1[1])}
+{6}{Battlefield 1.}{Battlefield 1.}{1}{}{0}{game.fade_and_teleport( 0, 0, 0, module_consts.MAP_ID_ZMOD_BATTLEFIELD1, module_consts.ZMOD_BATTLEFIELD1_ENTRY1[0], module_consts.ZMOD_BATTLEFIELD1_ENTRY1[1])}
+{11}{Return to shopmap.}{}{1}{}{0}{}
+
+{4000}{There's little to be gained by attacking the game portal.}{There's little to be gained by attacking the game portal.}{}{}{}{}
+{4001}{[exit]}{}{1}{}{0}{}

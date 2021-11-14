@@ -1,0 +1,12 @@
+{1500}{Browse}{Browse}{}{}{}{}
+{1502}{Buy Potions and Oils}{}{1}{}{1510}{}
+{1503}{B:Buy Instruments   }{}{1}{}{0}{utils_item.barter_list(npc, const_proto_list_items.PROTOS_INSTRUMENTS)}
+{1504}{B:Buy Alchemy       }{}{1}{}{0}{utils_item.barter_list(npc, const_proto_list_items.PROTOS_ALCHEMY)}
+{1505}{B:Buy Tools}{}{1}{}{0}{utils_item.barter_list(npc, const_proto_list_items.PROTOS_TOOLS)}
+{1509}{E:}{}{1}{}{0}{}
+
+{1510}{Buy Potions and Oils}{Buy Potions and Oils}{}{}{}{}
+{1512}{B:Buy Potions Level 1}{}{1}{}{0}{utils_item.barter_list(npc, const_proto_list_potions.PROTOS_POTIONS_LEVEL_1)}
+{1513}{B:Buy Potions Level 2}{}{1}{}{0}{utils_item.barter_list(npc, const_proto_list_potions.PROTOS_POTIONS_LEVEL_2)}
+{1514}{B:Buy Potions Level 3}{}{1}{}{0}{utils_item.barter_list(npc, const_proto_list_potions.PROTOS_POTIONS_LEVEL_3)}
+{1519}{E:}{}{1}{}{0}{}

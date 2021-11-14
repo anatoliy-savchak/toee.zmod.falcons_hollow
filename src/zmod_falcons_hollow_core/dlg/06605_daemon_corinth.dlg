@@ -1,0 +1,12 @@
+
+{10}{[You hear a twisted laugh.]
+Har, har, har. Look who's coming.
+[The man turns to you.]
+Hey, scum!}{[You hear a twisted laugh.]
+Har, har, har. Look who's coming.
+[The man turns to you.]
+Hey, scum!}{}{}{}{cs().display_encounter_thugs()}
+{11}{Continue}{}{1}{}{12}{}
+{12}{You better have cash. Pay us 5000, no less, and you can get on with your worthless life.}{You better have cash. Pay us 5000, no less, and you can get on with your worthless life.}}{}{}{}{}
+{13}{I'm not paying you anything.}{}{1}{}{}{cs().activate_encounter_thugs();npc.destroy()}
+{14}{I don't have that much.}{}{1}{}{}{cs().activate_encounter_thugs();npc.destroy()}

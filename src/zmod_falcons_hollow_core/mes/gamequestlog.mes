@@ -1,0 +1,19 @@
+// gamequestlog.mes - text for the logbook
+// MAX_QUESTS = 200
+// there are two text entries that the logbook will need for quests: title and description
+// for quest i; title will be at line i, and description will be at i + MAX_QUESTS
+
+
+// Quest Titles 000 - 199
+{0} {Missing Constello}
+{1} {Defend the Keep}
+{2} {Tenkits Ring}
+{3} {Quoris needs help destroying elementals}
+{4} {Recover Holy Chalice}
+
+// Quest Descriptions 200 - 399
+{200} {Commander Karef wants us to look for a Knight named Constello. We must go to Corinth, a village to the east, to find out what has happened to him.}
+{201} {The Keep is under attack. We should defend the Keep and save as much guardians as we can.}
+{202} {Tenkits, the quartermaster at the Keep, said that he will let us enter the store room if we bring back a silver ring which he has lost in a cave south west of the Keep.}
+{203} {Quoris, the wizard at the Tower of the Chalice, needs our help to destroy any hostile elementals he and his apprentice, Shania, might summon.}
+{204} {Quoris told us that the Knights of the Chalice have lost their most sacred relic, the Holy Chalice. If we bring the Chalice back to him, he will use it to make one of our weapon more powerful.}

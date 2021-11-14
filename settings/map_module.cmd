@@ -1,0 +1,2 @@
+mklink /j ..\src\zmod_falcons_hollow "D:\Temple\Temple of Elemental Evil.template\modules\zmod_falcons_hollow"
+mklink /j ..\src\zmod_falcons_hollow_core "D:\Temple\Temple of Elemental Evil.template\modules\zmod_falcons_hollow_core"

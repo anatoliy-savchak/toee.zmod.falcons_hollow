@@ -1,0 +1,20 @@
+//
+// ground.mes
+//
+// base names for ground art
+//
+//DAY MAPS are in 0000-0999 bank.  NIGHT MAPS should be found in 1000-1999 bank.  
+//
+//The NIGHT MAPS number should coincide with the end numbers found in the day bank.
+//
+
+//
+// DAY MAPS 0000-0999
+//
+
+{0000}{--TEMP--}
+{0001}{ShopMap-day}
+// NIGHT MAPS 1000-1999
+
+{1000}{--TEMP--}
+{1001}{ShopMap-day}

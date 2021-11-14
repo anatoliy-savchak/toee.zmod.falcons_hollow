@@ -1,0 +1,75 @@
+# Wizard
+
+{0}{[The wizard speaks in a soft voice]
+Welcome, dear friends. I am Quoris, at your service. However, presently I have a serivce to ask you.}{[The wizard speaks in a soft voice]
+Welcome, dear friends. I am Quoris, at your service. However, presently I have a serivce to ask you.}{}{}{}{}
+{1}{Continue.}{}{1}{}{10}{}
+
+{10}{Shania, my apprentice, must practice the art of summoning craetures. I will be busy focusing on her, so could you get rid of whatever creatures she summons?}{Shania, my apprentice, must practice the art of summoning craetures. I will be busy focusing on her, so could you get rid of whatever creatures she summons?}{}{}{}{ctrl(npc).dialog_summon_1_mention()}
+{11}{Sure. I'll do what I can.}{}{1}{}{0}{ctrl(npc).dialog_summon_1_agree(npc)}
+{12}{Sorry, we're not ready for a fight.}{}{1}{}{0}{}
+
+{30}{Many thanks for your help against the elementals. Here, take this 300 gold as reward. Now, maybe you would be interested in buying wands or scrolls?}{Many thanks for your help against the elementals. Here, take this 300 gold as reward. Now, maybe you would be interested in buying wands or scrolls?}{}{}{}{ctrl(npc).dialog_quest_summon_1_completed(npc)}
+{31}{B: Yes, please show me your stock.}{}{1}{}{0}{ctrl(npc).dialog_barter(npc)}
+{39}{F:}{}{1}{}{0}{}
+
+{40}{Dear knights, would you like to buy spells from me? Or would you like to know more about our organization, the Knights of the Chalice?}{Dear knights, would you like to buy spells from me? Or would you like to know more about our organization, the Knights of the Chalice?}{}{}{}{}
+{41}{B: Please show me your magic stock.}{}{1}{}{0}{ctrl(npc).dialog_barter(npc)}
+{42}{Tell me about the Knights.}{}{1}{}{50}{}
+{49}{F:}{}{1}{}{0}{}
+
+{50}{The Knights were founded centuries ago by a group of legendary warriors who wished to bring order to a divided land.}{The Knights were founded centuries ago by a group of legendary warriors who wished to bring order to a divided land.}{}{}{}{}
+{51}{Please continue.}{}{1}{}{60}{}
+
+{60}{They raised this tower and used it as the seat of their power. However, years passed and evil armies led by powerful spellcasters swept over this land.}{They raised this tower and used it as the seat of their power. However, years passed and evil armies led by powerful spellcasters swept over this land.}{}{}{}{}
+{61}{Please continue.}{}{1}{}{70}{}
+
+{70}{During the war, we lost our most sacred relic, the Holy Chalice. Should you recover the Chalice, bring it back to me and I shall unlock its power and transfer it to one of your weapons.}{During the war, we lost our most sacred relic, the Holy Chalice. Should you recover the Chalice, bring it back to me and I shall unlock its power and transfer it to one of your weapons.}{}{}{}{}
+{71}{I will do my best}{}{1}{}{0}{ctrl(npc).dialog_quest_chalice_given(npc)}
+
+
+{1000}{Browse}{Browse}{}{}{}{}
+{1001}{B:Sell}{}{1}{}{0}{utils_item.barter_sell(npc)}
+{1002}{Scrolls}{}{1}{}{1310}{}
+{1003}{Wands}{}{1}{}{1210}{}
+{1004}{Wondrous Items}{}{1}{}{0}{}
+{1009}{E:}{}{1}{}{0}{}
+
+{1210}{Browse}{Browse}{}{}{}{}
+{1212}{B:Buy Arcane Wand Level 0}{}{1}{}{0}{utils_item.barter_list(npc, const_proto_list_wands.PROTOS_WANDS_ARCANE_LEVEL_0)}
+{1213}{B:Buy Arcane Wand Level 1}{}{1}{}{0}{utils_item.barter_list(npc, const_proto_list_wands.PROTOS_WANDS_ARCANE_LEVEL_1)}
+{1214}{B:Buy Arcane Wand Level 2}{}{1}{}{0}{utils_item.barter_list(npc, const_proto_list_wands.PROTOS_WANDS_ARCANE_LEVEL_2)}
+{1217}{Next...}{}{1}{}{1220}{}
+{1218}{Back...}{}{1}{}{1000}{}
+{1219}{E:}{}{1}{}{0}{}
+
+{1220}{Browse}{Browse}{}{}{}{}
+{1222}{B:Buy Arcane Wand Level 3}{}{1}{}{0}{utils_item.barter_list(npc, const_proto_list_wands.PROTOS_WANDS_ARCANE_LEVEL_3)}
+{1223}{B:Buy Arcane Wand Level 4}{}{1}{}{0}{utils_item.barter_list(npc, const_proto_list_wands.PROTOS_WANDS_ARCANE_LEVEL_4)}
+{1224}{B:Buy Arcane Wand Level 5}{}{1}{}{0}{utils_item.barter_list(npc, const_proto_list_wands.PROTOS_WANDS_ARCANE_LEVEL_5)}
+{1228}{Back...}{}{1}{}{1210}{}
+{1229}{E:}{}{1}{}{0}{}
+
+{1310}{Browse}{Browse}{}{}{}{}
+{1312}{B:Buy Arcane Scroll Level 0}{}{1}{}{0}{utils_item.barter_list(npc, const_proto_list_scrolls.PROTOS_WANDS_ARCANE_LEVEL_0)}
+{1313}{B:Buy Arcane Scroll Level 1}{}{1}{}{0}{utils_item.barter_list(npc, const_proto_list_scrolls.PROTOS_WANDS_ARCANE_LEVEL_1)}
+{1314}{B:Buy Arcane Scroll Level 2}{}{1}{}{0}{utils_item.barter_list(npc, const_proto_list_scrolls.PROTOS_WANDS_ARCANE_LEVEL_2)}
+{1317}{Next...}{}{1}{}{1320}{}
+{1318}{Back...}{}{1}{}{1000}{}
+{1319}{E:}{}{1}{}{0}{}
+
+{1320}{Browse}{Browse}{}{}{}{}
+{1322}{B:Buy Arcane Scroll Level 3}{}{1}{}{0}{utils_item.barter_list(npc, const_proto_list_scrolls.PROTOS_WANDS_ARCANE_LEVEL_3)}
+{1323}{B:Buy Arcane Scroll Level 4}{}{1}{}{0}{utils_item.barter_list(npc, const_proto_list_scrolls.PROTOS_WANDS_ARCANE_LEVEL_4)}
+{1324}{B:Buy Arcane Scroll Level 5}{}{1}{}{0}{utils_item.barter_list(npc, const_proto_list_scrolls.PROTOS_WANDS_ARCANE_LEVEL_5)}
+{1327}{Next...}{}{1}{}{1330}{}
+{1328}{Back...}{}{1}{}{1310}{}
+{1329}{E:}{}{1}{}{0}{}
+
+{1330}{Browse}{Browse}{}{}{}{}
+{1332}{B:Buy Arcane Scroll Level 6}{}{1}{}{0}{utils_item.barter_list(npc, const_proto_list_scrolls.PROTOS_WANDS_ARCANE_LEVEL_6)}
+{1333}{B:Buy Arcane Scroll Level 7}{}{1}{}{0}{utils_item.barter_list(npc, const_proto_list_scrolls.PROTOS_WANDS_ARCANE_LEVEL_7)}
+{1334}{B:Buy Arcane Scroll Level 8}{}{1}{}{0}{utils_item.barter_list(npc, const_proto_list_scrolls.PROTOS_WANDS_ARCANE_LEVEL_8)}
+{1335}{B:Buy Arcane Scroll Level 9}{}{1}{}{0}{utils_item.barter_list(npc, const_proto_list_scrolls.PROTOS_WANDS_ARCANE_LEVEL_9)}
+{1338}{Back...}{}{1}{}{1320}{}
+{1339}{E:}{}{1}{}{0}{}
