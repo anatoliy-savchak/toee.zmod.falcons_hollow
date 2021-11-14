@@ -324,15 +324,6 @@
     <Content Include="zmod_falcons_hollow_core\dlg\00405Clothing_Chest.dlg" />
     <Content Include="zmod_falcons_hollow_core\dlg\00406Game_Portal.dlg" />
     <Content Include="zmod_falcons_hollow_core\dlg\06610_daemon_corinth.dlg" />
-    <Content Include="zmod_falcons_hollow_core\dlg\06611_corinth_encounters.dlg" />
-    <Content Include="zmod_falcons_hollow_core\dlg\14710_smith.dlg" />
-    <Content Include="zmod_falcons_hollow_core\dlg\14711_smith_wife.dlg" />
-    <Content Include="zmod_falcons_hollow_core\dlg\14716_gambler.dlg" />
-    <Content Include="zmod_falcons_hollow_core\dlg\14715_wizard_help.dlg" />
-    <Content Include="zmod_falcons_hollow_core\dlg\14712_wizard.dlg" />
-    <Content Include="zmod_falcons_hollow_core\dlg\06600_daemon_keep.dlg" />
-    <Content Include="zmod_falcons_hollow_core\dlg\14714_keep_commander.dlg" />
-    <Content Include="zmod_falcons_hollow_core\dlg\14713_cleric.dlg" />
     <Content Include="zmod_falcons_hollow_core\mes\gamekeylog.mes" />
     <Content Include="zmod_falcons_hollow_core\mes\gamequestlog.mes" />
     <Content Include="zmod_falcons_hollow_core\mes\game_rd_npc_f2f.mes" />
