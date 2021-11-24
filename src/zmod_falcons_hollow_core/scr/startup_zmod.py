@@ -10,8 +10,8 @@ def zmod_conditions_apply_pc():
 		#pc.condition_add("Skill_Appraise_Bonus")
 		pc.condition_add("Inspect")
 		pc.condition_add('Rest_Full')
-		pc.condition_add("Debug_Location")
-		pc.condition_add("Debug_Rotation")
+		#pc.condition_add("Debug_Location")
+		#pc.condition_add("Debug_Rotation")
 
 		#pc.faction_add(factions_zmod.FACTION_ALLY_NPC)
 		#pc.faction_add(factions_zmod.FACTION_FIRENDY_NPC)

@@ -70,6 +70,14 @@ class CtrlTownSquare(ctrl_daemon2.CtrlDaemon2):
 			passage.scripts[const_toee.sn_use] = self.default_script_id
 			self.vars["passage_town_square_generic_shop"] = passage.id
 			print("passage_town_square_generic_shop = {}".format(passage.id))
+
+		loc, ox, oy = utils_obj.sec2loc(505, 479), -12.7279215, -12.7279215
+		passage = toee.game.obj_create(const_proto_sceneries.PROTO_SCENERY_ICON_DOOR, loc, ox, oy)
+		if (passage):
+			passage.move(loc, ox, oy)
+			passage.scripts[const_toee.sn_use] = self.default_script_id
+			self.vars["passage_town_square_church"] = passage.id
+			print("passage_town_square_church = {}".format(passage.id))
 		return
 
 	def do_san_use(self, attachee, triggerer):
@@ -80,5 +88,7 @@ class CtrlTownSquare(ctrl_daemon2.CtrlDaemon2):
 			toee.game.fade_and_teleport(0, 0, 0, module_consts.MAP_ID_ZMOD_D_TOWN_GATES, module_consts.ZMOD_D_TOWN_GATES_ENTRY_COORDS_SOUTH[0], module_consts.ZMOD_D_TOWN_GATES_ENTRY_COORDS_SOUTH[1])
 		elif (attachee.id == self.vars["passage_town_square_generic_shop"]):
 			toee.game.fade_and_teleport(0, 0, 0, module_consts.MAP_ID_ZMOD_D_TOWN_BUILDINGS, module_consts.ZMOD_D_TOWN_BUILDINGS_GSHOP_COORDS_ENTRY[0], module_consts.ZMOD_D_TOWN_BUILDINGS_GSHOP_COORDS_ENTRY[1])
+		elif (attachee.id == self.vars["passage_town_square_church"]):
+			toee.game.fade_and_teleport(0, 0, 0, module_consts.MAP_ID_ZMOD_D_TOWN_BUILDINGS, module_consts.ZMOD_D_TOWN_BUILDINGS_CHURCH_COORDS_ENTRY[0], module_consts.ZMOD_D_TOWN_BUILDINGS_CHURCH_COORDS_ENTRY[1])
 
 		return toee.RUN_DEFAULT
