@@ -44,7 +44,8 @@ class CtrlTombMound(ctrl_daemon2.CtrlDaemon2):
 
 	def place_encounters_initial(self):
 		self.place_passages()
-		self.place_encounter_m01()
+		#self.place_encounter_m01()
+		self.place_encounter_m03()
 		return
 
 	def delayed_mode(self):
@@ -109,4 +110,50 @@ class CtrlTombMound(ctrl_daemon2.CtrlDaemon2):
 		print("activate_encounter_m01")
 		self.activate_monster("m01", "shadow01")
 		self.activate_monster("m01", "shadow02")
+		return
+
+	def place_encounter_m03(self):
+		PROMTER_SET = {
+			"loc": utils_obj.sec2loc(475, 478),
+			"title": "The Broken Fountain",
+			"rot": const_toee.rotation_0800_oclock
+		}
+		npc = self.create_promter_at(PROMTER_SET["loc"], self.get_dialogid_default(), 20, 5 \
+			, py06122_cormyr_prompter.PROMTER_DIALOG_METHOD_DIALOG, PROMTER_SET["title"], PROMTER_SET["rot"] \
+		)
+		self.vars["promter_id_accursed_entry"] = npc.id
+		#npc.scripts[const_toee.sn_bust] = DAEMON_SCRIPT_ID
+		if (not self.delayed_monsters()):
+			self.place_monsters_m03()
+		return
+
+	def place_monsters_m03(self):
+		self.create_npc_at(utils_obj.sec2loc(475, 476), py06631_tomb_encounters.CtrlElementalWaterSmall, const_toee.rotation_0500_oclock, "m03", "water01", factions_zmod.FACTION_ENEMY)
+		self.create_npc_at(utils_obj.sec2loc(477, 476), py06631_tomb_encounters.CtrlElementalWaterSmall, const_toee.rotation_0500_oclock, "m03", "water02", factions_zmod.FACTION_ENEMY)
+		self.create_npc_at(utils_obj.sec2loc(479, 478), py06631_tomb_encounters.CtrlElementalWaterSmall, const_toee.rotation_0500_oclock, "m03", "water03", factions_zmod.FACTION_ENEMY)
+		return
+
+	def display_encounter_m03(self):
+		p = toee.game.party
+		l = len(p)
+		p[0].move(utils_obj.sec2loc(475, 480))
+		if (l > 1): p[0].move(utils_obj.sec2loc(475, 478))
+		if (l > 2): p[1].move(utils_obj.sec2loc(477, 478))
+		if (l > 3): p[2].move(utils_obj.sec2loc(479, 478))
+		if (l > 4): p[3].move(utils_obj.sec2loc(479, 480))
+		if (l > 5): p[4].move(utils_obj.sec2loc(477, 480))
+		print("display_encounter_m03")
+		if (self.delayed_monsters()):
+			self.place_monsters_m03()
+		self.reveal_monster("m03", "water01")
+		self.reveal_monster("m03", "water02")
+		self.reveal_monster("m03", "water03")
+		return
+
+	def activate_encounter_m03(self):
+		self.display_encounter_m03()
+		print("activate_encounter_m03")
+		self.activate_monster("m03", "water01")
+		self.activate_monster("m03", "water02")
+		self.activate_monster("m03", "water03")
 		return

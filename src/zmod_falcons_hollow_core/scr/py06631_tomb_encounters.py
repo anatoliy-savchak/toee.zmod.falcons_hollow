@@ -26,3 +26,11 @@ class CtrlShadow(ctrl_behaviour.CtrlBehaviour):
 		npc.condition_add_with_args("Monster Damage Type", toee.D20DT_SUBDUAL)
 		return
 
+class CtrlElementalWaterSmall(ctrl_behaviour.CtrlBehaviour):
+	@classmethod
+	def get_proto_id(cls): return 14379
+
+	def after_created(self, npc):
+		assert isinstance(npc, toee.PyObjHandle)
+		npc.scripts[const_toee.sn_enter_combat] = THIS_SCRIPT_ID
+		return
