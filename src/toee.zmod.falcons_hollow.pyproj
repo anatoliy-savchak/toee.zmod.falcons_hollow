@@ -157,6 +157,7 @@
     <Compile Include="zmod_falcons_hollow_core\scr\py06122_cormyr_prompter.py" />
     <Compile Include="zmod_falcons_hollow_core\scr\py06123_event_object_fireplace.py" />
     <Compile Include="zmod_falcons_hollow_core\scr\py06214_doors_autodestroy.py" />
+    <Compile Include="zmod_falcons_hollow_core\scr\py06630_tomb_mound.py" />
     <Compile Include="zmod_falcons_hollow_core\scr\py06614_apothecary.py" />
     <Compile Include="zmod_falcons_hollow_core\scr\py06613_forest_path.py" />
     <Compile Include="zmod_falcons_hollow_core\scr\py06612_town_buildings.py" />
