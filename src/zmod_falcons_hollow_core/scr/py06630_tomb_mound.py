@@ -1,8 +1,9 @@
 import toee, debug, utils_toee, utils_storage, utils_obj, utils_item, const_toee, ctrl_daemon, ctrl_daemon2
 import ctrl_behaviour, py06122_cormyr_prompter, factions_zmod, utils_npc
 import monster_info, module_quests, module_consts, const_proto_sceneries
+import py06631_tomb_encounters
 
-DAEMON_SCRIPT_ID = 6614
+DAEMON_SCRIPT_ID = 6630
 DAEMON_GID = "G_99937EEC_DAAD_476D_8346_09C9F0345275"
 DEBUG = 0
 DEBUG_NAMES = 1
@@ -11,8 +12,8 @@ def san_new_map(attachee, triggerer):
 	return ctrl_daemon2.do_san_new_map(attachee, triggerer, module_consts.MAP_ID_ZMOD_D_TOMB_MOUND, CtrlTombMound)
 
 def san_first_heartbeat(attachee, triggerer):
-	print(attachee.id)
-	debug.breakp("")
+	#print(attachee.id)
+	#debug.breakp("")
 	return ctrl_daemon2.do_san_first_heartbeat(attachee, triggerer, module_consts.MAP_ID_ZMOD_D_TOMB_MOUND, CtrlTombMound)
 
 def san_heartbeat(attachee, triggerer):
@@ -43,7 +44,7 @@ class CtrlTombMound(ctrl_daemon2.CtrlDaemon2):
 
 	def place_encounters_initial(self):
 		self.place_passages()
-		#self.place_encounter_c03(self.delayed_mode())
+		self.place_encounter_m01()
 		return
 
 	def delayed_mode(self):
@@ -52,6 +53,9 @@ class CtrlTombMound(ctrl_daemon2.CtrlDaemon2):
 	# Sleep interface
 	def can_sleep(self):
 		return toee.SLEEP_IMPOSSIBLE
+
+	def delayed_monsters(self):
+		return True
 
 	def place_passages(self):
 		loc, ox, oy = utils_obj.sec2loc(518, 277), -12.7279215, -12.7279215
@@ -71,3 +75,38 @@ class CtrlTombMound(ctrl_daemon2.CtrlDaemon2):
 			toee.game.fade_and_teleport(0, 0, 0, module_consts.MAP_ID_ZMOD_D_FOREST_PATH, module_consts.ZMOD_D_FOREST_PATH_ASHOP_COORDS_ENTRY[0], module_consts.ZMOD_D_FOREST_PATH_ASHOP_COORDS_ENTRY[1])
 
 		return toee.RUN_DEFAULT
+
+	def place_encounter_m01(self):
+		PROMTER_SET = {
+			"loc": utils_obj.sec2loc(486, 478),
+			"title": "Accursed Entry",
+			"rot": const_toee.rotation_0800_oclock
+		}
+		npc = self.create_promter_at(PROMTER_SET["loc"], self.get_dialogid_default(), 10, 5 \
+			, py06122_cormyr_prompter.PROMTER_DIALOG_METHOD_DIALOG, PROMTER_SET["title"], PROMTER_SET["rot"] \
+		)
+		self.vars["promter_id_accursed_entry"] = npc.id
+		#npc.scripts[const_toee.sn_bust] = DAEMON_SCRIPT_ID
+		if (not self.delayed_monsters()):
+			self.place_monsters_m01()
+		return
+
+	def place_monsters_m01(self):
+		self.create_npc_at(utils_obj.sec2loc(488, 476), py06631_tomb_encounters.CtrlShadow, const_toee.rotation_0500_oclock, "m01", "shadow01", factions_zmod.FACTION_ENEMY)
+		self.create_npc_at(utils_obj.sec2loc(488, 480), py06631_tomb_encounters.CtrlShadow, const_toee.rotation_0500_oclock, "m01", "shadow02", factions_zmod.FACTION_ENEMY)
+		return
+
+	def display_encounter_m01(self):
+		print("display_encounter_m01")
+		if (self.delayed_monsters()):
+			self.place_monsters_m01()
+		self.reveal_monster("m01", "shadow01")
+		self.reveal_monster("m01", "shadow02")
+		return
+
+	def activate_encounter_m01(self):
+		self.display_encounter_m01()
+		print("activate_encounter_m01")
+		self.activate_monster("m01", "shadow01")
+		self.activate_monster("m01", "shadow02")
+		return

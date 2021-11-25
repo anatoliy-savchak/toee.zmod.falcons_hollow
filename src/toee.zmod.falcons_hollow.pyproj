@@ -157,6 +157,7 @@
     <Compile Include="zmod_falcons_hollow_core\scr\py06122_cormyr_prompter.py" />
     <Compile Include="zmod_falcons_hollow_core\scr\py06123_event_object_fireplace.py" />
     <Compile Include="zmod_falcons_hollow_core\scr\py06214_doors_autodestroy.py" />
+    <Compile Include="zmod_falcons_hollow_core\scr\py06631_tomb_encounters.py" />
     <Compile Include="zmod_falcons_hollow_core\scr\py06630_tomb_mound.py" />
     <Compile Include="zmod_falcons_hollow_core\scr\py06614_apothecary.py" />
     <Compile Include="zmod_falcons_hollow_core\scr\py06613_forest_path.py" />
@@ -328,6 +329,7 @@
     <Content Include="zmod_falcons_hollow_core\dlg\00404Armor_Chest.dlg" />
     <Content Include="zmod_falcons_hollow_core\dlg\00405Clothing_Chest.dlg" />
     <Content Include="zmod_falcons_hollow_core\dlg\00406Game_Portal.dlg" />
+    <Content Include="zmod_falcons_hollow_core\dlg\06630_tomb_mound.dlg" />
     <Content Include="zmod_falcons_hollow_core\dlg\06610_daemon_corinth.dlg" />
     <Content Include="zmod_falcons_hollow_core\mes\gamekeylog.mes" />
     <Content Include="zmod_falcons_hollow_core\mes\gamequestlog.mes" />
