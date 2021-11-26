@@ -314,6 +314,9 @@ class DamagePacket:
 		"""add_damage_resistance(int: amount, int[D20DT_BLUDGEONING]: damType, int: damMesLine)"""
 		return
 
+	def add_mod_factor(self, factor, damType, damMesLine):
+		return
+
 class ModifierSpec:
 	def __init__(self):
 		self.name = None

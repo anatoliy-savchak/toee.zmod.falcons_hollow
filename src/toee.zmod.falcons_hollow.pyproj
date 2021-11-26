@@ -87,6 +87,9 @@
     <Compile Include="zmod_falcons_hollow_core\rules\d20_actions\action03020_stench.py" />
     <Compile Include="zmod_falcons_hollow_core\scr.builtin\char_editor.py" />
     <Compile Include="zmod_falcons_hollow_core\scr.builtin\debug.py" />
+    <Compile Include="zmod_falcons_hollow_core\scr.builtin\roll_history.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="zmod_falcons_hollow_core\scr.builtin\templeplus\pymod.py" />
     <Compile Include="zmod_falcons_hollow_core\scr.builtin\templeplus\__init__.py" />
     <Compile Include="zmod_falcons_hollow_core\scr.builtin\toee.py" />
@@ -199,6 +202,7 @@
     <Compile Include="zmod_falcons_hollow_core\scr\tpModifiers\ability_check_modifier_attacker.py" />
     <Compile Include="zmod_falcons_hollow_core\scr\tpModifiers\bonus_ac.py" />
     <Compile Include="zmod_falcons_hollow_core\scr\tpModifiers\debug_info.py" />
+    <Compile Include="zmod_falcons_hollow_core\scr\tpModifiers\monster_incorporeal2.py" />
     <Compile Include="zmod_falcons_hollow_core\scr\tpModifiers\rest_full.py" />
     <Compile Include="zmod_falcons_hollow_core\scr\tpModifiers\forge_weapon.py" />
     <Compile Include="zmod_falcons_hollow_core\scr\tpModifiers\ai_improved_trip_aoo.py" />

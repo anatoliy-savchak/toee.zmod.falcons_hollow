@@ -3,3 +3,12 @@
 
 {20}{The sound of bubbling water echoes here and the air is dank and warm. In every corner of the room a fountain bubbles and smokes, with wisps of white-hot vapor rising from the carved needle-filled maws of some strange fish-like creatures. The stone effigies of this strange race are rendered in elegant repose, spouting water from their mouths into basins made by their cradled arms.}{The sound of bubbling water echoes here and the air is dank and warm. In every corner of the room a fountain bubbles and smokes, with wisps of white-hot vapor rising from the carved needle-filled maws of some strange fish-like creatures. The stone effigies of this strange race are rendered in elegant repose, spouting water from their mouths into basins made by their cradled arms.}{}{}{}{cs().activate_encounter_m03()}
 {21}{Close.}{}{1}{}{0}{npc.destroy()}
+
+{40}{Time ravaged this ornate chamber, which was obviously once majestic to behold. Half-crumbled carvings of cityscapes, some atopclouds and others below the waves, adorn the walls here.}{Time ravaged this ornate chamber, which was obviously once majestic to behold. Half-crumbled carvings of cityscapes, some atopclouds and others below the waves, adorn the walls here.}{}{}{}{npc.destroy();cs().activate_encounter_m04()}
+{41}{Close.}{}{1}{}{0}{}
+
+{50}{This crumbling chamber holds six sarcophagi, three along each wall. Reliefs of armored warriors adorn their lids.}{This crumbling chamber holds six sarcophagi, three along each wall. Reliefs of armored warriors adorn their lids.}{}{}{}{npc.destroy();cs().activate_encounter_m05()}
+{51}{Close.}{}{1}{}{0}{}
+
+{60}{This chamber has suffered a cave-in and now most of it is crushed beneath tons of rock, clay,and earth.}{This chamber has suffered a cave-in and now most of it is crushed beneath tons of rock, clay,and earth.}{}{}{}{npc.destroy();cs().activate_encounter_m06()}
+{61}{Close.}{}{1}{}{0}{}

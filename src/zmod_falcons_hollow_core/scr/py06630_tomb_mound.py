@@ -45,7 +45,10 @@ class CtrlTombMound(ctrl_daemon2.CtrlDaemon2):
 	def place_encounters_initial(self):
 		self.place_passages()
 		#self.place_encounter_m01()
-		self.place_encounter_m03()
+		#self.place_encounter_m03()
+		#self.place_encounter_m04()
+		self.place_encounter_m05()
+		self.place_encounter_m06()
 		return
 
 	def delayed_mode(self):
@@ -156,4 +159,120 @@ class CtrlTombMound(ctrl_daemon2.CtrlDaemon2):
 		self.activate_monster("m03", "water01")
 		self.activate_monster("m03", "water02")
 		self.activate_monster("m03", "water03")
+		return
+
+	def place_encounter_m04(self):
+		PROMTER_SET = {
+			"loc": utils_obj.sec2loc(464, 478),
+			"title": "Mural Chamber",
+			"rot": const_toee.rotation_0800_oclock
+		}
+		npc = self.create_promter_at(PROMTER_SET["loc"], self.get_dialogid_default(), 40, 10 \
+			, py06122_cormyr_prompter.PROMTER_DIALOG_METHOD_DIALOG, PROMTER_SET["title"], PROMTER_SET["rot"] \
+		)
+		#self.vars["promter_id_accursed_entry"] = npc.id
+		#npc.scripts[const_toee.sn_bust] = DAEMON_SCRIPT_ID
+		if (not self.delayed_monsters()):
+			self.place_monsters_m04()
+		return
+
+	def place_monsters_m04(self):
+		self.create_npc_at(utils_obj.sec2loc(465, 477), py06631_tomb_encounters.CtrlBelker, const_toee.rotation_0500_oclock, "m04", "belker", factions_zmod.FACTION_ENEMY)
+		return
+
+	def display_encounter_m04(self):
+		p = toee.game.party
+		l = len(p)
+		p[0].move(utils_obj.sec2loc(475, 480))
+		if (l >= 1): p[0].move(utils_obj.sec2loc(468, 476))
+		if (l >= 2): p[1].move(utils_obj.sec2loc(468, 478))
+		if (l >= 3): p[2].move(utils_obj.sec2loc(470, 478))
+		if (l >= 4): p[3].move(utils_obj.sec2loc(470, 476))
+		if (l >= 5): p[4].move(utils_obj.sec2loc(468, 480))
+		print("display_encounter_m04")
+		if (self.delayed_monsters()):
+			self.place_monsters_m04()
+		self.reveal_monster("m04", "belker")
+		return
+
+	def activate_encounter_m04(self):
+		self.display_encounter_m04()
+		print("activate_encounter_m04")
+		self.activate_monster("m04", "belker")
+		return
+
+	def place_encounter_m05(self):
+		PROMTER_SET = {
+			"loc": utils_obj.sec2loc(466, 471),
+			"title": "Sepulcher of the Honor guard",
+			"rot": const_toee.rotation_0800_oclock
+		}
+		npc = self.create_promter_at(PROMTER_SET["loc"], self.get_dialogid_default(), 50, 5 \
+			, py06122_cormyr_prompter.PROMTER_DIALOG_METHOD_DIALOG, PROMTER_SET["title"], PROMTER_SET["rot"] \
+		)
+		#self.vars["promter_id_accursed_entry"] = npc.id
+		#npc.scripts[const_toee.sn_bust] = DAEMON_SCRIPT_ID
+		if (not self.delayed_monsters()):
+			self.place_monsters_m05()
+		return
+
+	def place_monsters_m05(self):
+		self.create_npc_at(utils_obj.sec2loc(464, 471), py06631_tomb_encounters.CtrlWight, const_toee.rotation_0500_oclock, "m05", "wight01", factions_zmod.FACTION_ENEMY)
+		self.create_npc_at(utils_obj.sec2loc(464, 469), py06631_tomb_encounters.CtrlWight, const_toee.rotation_0500_oclock, "m05", "wight02", factions_zmod.FACTION_ENEMY)
+		self.create_npc_at(utils_obj.sec2loc(468, 471), py06631_tomb_encounters.CtrlWight, const_toee.rotation_0500_oclock, "m05", "wight03", factions_zmod.FACTION_ENEMY)
+		self.create_npc_at(utils_obj.sec2loc(468, 469), py06631_tomb_encounters.CtrlWight, const_toee.rotation_0500_oclock, "m05", "wight04", factions_zmod.FACTION_ENEMY)
+		self.create_npc_at(utils_obj.sec2loc(466, 467), py06631_tomb_encounters.CtrlWight, const_toee.rotation_0500_oclock, "m05", "wight05", factions_zmod.FACTION_ENEMY)
+		return
+
+	def display_encounter_m05(self):
+		print("display_encounter_m05")
+		if (self.delayed_monsters()):
+			self.place_monsters_m05()
+		self.reveal_monster("m05", "wight01")
+		self.reveal_monster("m05", "wight02")
+		self.reveal_monster("m05", "wight03")
+		self.reveal_monster("m05", "wight04")
+		self.reveal_monster("m05", "wight05")
+		return
+
+	def activate_encounter_m05(self):
+		self.display_encounter_m05()
+		print("activate_encounter_m05")
+		self.activate_monster("m05", "wight01")
+		self.activate_monster("m05", "wight02")
+		self.activate_monster("m05", "wight03")
+		self.activate_monster("m05", "wight04")
+		self.activate_monster("m05", "wight05")
+		return
+
+	def place_encounter_m06(self):
+		PROMTER_SET = {
+			"loc": utils_obj.sec2loc(466, 486),
+			"title": "The Consort",
+			"rot": const_toee.rotation_0800_oclock
+		}
+		npc = self.create_promter_at(PROMTER_SET["loc"], self.get_dialogid_default(), 60, 10 \
+			, py06122_cormyr_prompter.PROMTER_DIALOG_METHOD_DIALOG, PROMTER_SET["title"], PROMTER_SET["rot"] \
+		)
+		#self.vars["promter_id_accursed_entry"] = npc.id
+		#npc.scripts[const_toee.sn_bust] = DAEMON_SCRIPT_ID
+		if (not self.delayed_monsters()):
+			self.place_monsters_m06()
+		return
+
+	def place_monsters_m06(self):
+		self.create_npc_at(utils_obj.sec2loc(468, 488), py06631_tomb_encounters.CtrlWraith, const_toee.rotation_1100_oclock, "m06", "wraith", factions_zmod.FACTION_ENEMY)
+		return
+
+	def display_encounter_m06(self):
+		print("display_encounter_m06")
+		if (self.delayed_monsters()):
+			self.place_monsters_m06()
+		self.reveal_monster("m06", "wraith")
+		return
+
+	def activate_encounter_m06(self):
+		self.display_encounter_m06()
+		print("activate_encounter_m06")
+		self.activate_monster("m06", "wraith")
 		return
