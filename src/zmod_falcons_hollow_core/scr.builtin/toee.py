@@ -568,12 +568,12 @@ class PyObjHandle(object):
 		""" npc.skill_roll(int[skill_appraise...]: skill_id, int: dc, int: flags) -> int"""
 		return 0
 
-	def spell_known_add(self, spellIdx, spellClassCode, slotLevel):
-		"""npc.spell_known_add(int[...]: spellIdx, int: spellClassCode, int: slotLevel [zero based]) -> None"""
+	def spell_known_add(self, spellIdx, spellClassCode, slotLevel, is_domain):
+		"""npc.spell_known_add(int[...]: spellIdx, int: spellClassCode, int: slotLevel [zero based], int: is_domain) -> None"""
 		return
 
-	def spell_memorized_add(self, spellIdx, spellClassCode, slotLevel):
-		"""npc.spell_memorized_add(int: spellIdx, int: spellClassCode, int: slotLevel) -> None"""
+	def spell_memorized_add(self, spellIdx, spellClassCode, slotLevel, is_domain):
+		"""npc.spell_memorized_add(int: spellIdx, int: spellClassCode, int: slotLevel, int: is_domain) -> None"""
 		return
 	
 	def spells_pending_to_memorized(self):

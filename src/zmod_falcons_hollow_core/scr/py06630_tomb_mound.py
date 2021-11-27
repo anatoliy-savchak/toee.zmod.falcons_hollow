@@ -47,8 +47,9 @@ class CtrlTombMound(ctrl_daemon2.CtrlDaemon2):
 		#self.place_encounter_m01()
 		#self.place_encounter_m03()
 		#self.place_encounter_m04()
-		self.place_encounter_m05()
-		self.place_encounter_m06()
+		#self.place_encounter_m05()
+		#self.place_encounter_m06()
+		self.place_encounter_m08()
 		return
 
 	def delayed_mode(self):
@@ -276,3 +277,41 @@ class CtrlTombMound(ctrl_daemon2.CtrlDaemon2):
 		print("activate_encounter_m06")
 		self.activate_monster("m06", "wraith")
 		return
+
+	def place_encounter_m08(self):
+		PROMTER_SET = {
+			"loc": utils_obj.sec2loc(447, 478),
+			"title": "The Consort",
+			"rot": const_toee.rotation_0800_oclock
+		}
+		npc = self.create_promter_at(PROMTER_SET["loc"], self.get_dialogid_default(), 80, 5 \
+			, py06122_cormyr_prompter.PROMTER_DIALOG_METHOD_DIALOG, PROMTER_SET["title"], PROMTER_SET["rot"] \
+		)
+		#self.vars["promter_id_accursed_entry"] = npc.id
+		#npc.scripts[const_toee.sn_bust] = DAEMON_SCRIPT_ID
+		if (not self.delayed_monsters()):
+			self.place_monsters_m08()
+		return
+
+	def place_monsters_m08(self):
+		king_npc, king_ctrl = self.create_npc_at(utils_obj.sec2loc(445, 478), py06631_tomb_encounters.CtrlKoboldKing, const_toee.rotation_0700_oclock, "m08", "king", factions_zmod.FACTION_ENEMY)
+		self.vars['king_id'] = king_npc.id
+		return
+
+	def display_encounter_m08(self):
+		print("display_encounter_m08")
+		if (self.delayed_monsters()):
+			self.place_monsters_m08()
+		self.reveal_monster("m08", "king")
+		return
+
+	def activate_encounter_m08(self):
+		#self.display_encounter_m08()
+		print("activate_encounter_m08")
+		self.activate_monster("m08", "king")
+		return
+
+	def get_king_ctrl(self):
+		king_id = self.vars.get('king_id')
+		ctrl = ctrl_behaviour.get_ctrl(king_id)
+		return ctrl

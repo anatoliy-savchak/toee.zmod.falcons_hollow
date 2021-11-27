@@ -1,8 +1,8 @@
 import toee, debug, tpdp, utils_storage, utils_npc_spells, const_toee, utils_tactics, const_proto_weapon, utils_item, const_proto_armor, const_proto_scrolls, ctrl_behaviour
 import const_proto_potions, utils_obj, const_proto_food, utils_npc, utils_target_list, const_proto_wands, utils_sneak, const_deseases, utils_npc_spells, utils_npc
-import const_proto_items, const_proto_rings, const_proto_cloth, const_proto_wondrous, utils_races, utils_npc_build, const_proto_npc
+import const_proto_items, const_proto_rings, const_proto_cloth, const_proto_wondrous, utils_races, utils_npc_build, const_proto_npc, utils_npc_spells_tactics
 
-THIS_SCRIPT_ID = 06631
+THIS_SCRIPT_ID = 6631
 def ctrl(npc): return ctrl_behaviour.get_ctrl(npc.id)
 def san_start_combat(attachee, triggerer): return ctrl_behaviour.san_start_combat(attachee, triggerer)
 def san_enter_combat(attachee, triggerer): return ctrl_behaviour.san_enter_combat(attachee, triggerer)
@@ -79,4 +79,88 @@ class CtrlWraith(ctrl_behaviour.CtrlBehaviour):
 		#npc.condition_add("Monster Incorporeal")
 		npc.condition_add("Monster_Incorporeal2")
 		
+		return
+
+class CtrlKoboldKing(ctrl_behaviour.CtrlBehaviourAI):
+	@classmethod
+	def get_proto_id(cls): return 14641
+
+	def after_created(self, npc):
+		assert isinstance(npc, toee.PyObjHandle)
+		super(CtrlKoboldKing, self).after_created(npc)
+
+		npc.scripts[const_toee.sn_enter_combat] = THIS_SCRIPT_ID
+		npc.scripts[const_toee.sn_start_combat] = THIS_SCRIPT_ID
+
+		utils_item.item_create_in_inventory(const_proto_cloth.PROTO_CLOAK_RED, npc)
+		npc.item_wield_best_all()
+		utils_npc.npc_generate_hp(npc)
+
+		self.define_spells(npc)
+		return
+
+	def define_spells(self, npc):
+		assert isinstance(npc, toee.PyObjHandle)
+
+		stat_class = toee.stat_level_sorcerer
+		stat_class = toee.domain_special
+		caster_level = npc.highest_arcane_caster_level
+		# 2
+		self.spells.add_spell(toee.spell_bulls_strength, stat_class, caster_level)
+		# 1
+		self.spells.add_spell(toee.spell_mage_armor, stat_class, caster_level)
+		self.spells.add_spell(toee.spell_magic_missile, stat_class, caster_level)
+		self.spells.add_spell(toee.spell_sleep, stat_class, caster_level)
+
+		# 0
+		self.spells.add_spell(toee.spell_daze, stat_class, caster_level)
+
+		self.spells.memorize_all(npc)
+		return
+	
+	def enter_combat(self, attachee, triggerer):
+		#self.define_spells(attachee)
+		return toee.RUN_DEFAULT
+
+	def create_tactics(self, npc):
+		assert isinstance(npc, toee.PyObjHandle)
+		#debug.breakp("create_tactics")
+
+		foes_adjacent = self._vars_tactics.get("foes_adjacent")
+		assert isinstance(foes_adjacent, list)
+		foes_threatening = self._vars_tactics.get("foes_threatening")
+		assert isinstance(foes_threatening, list)
+
+		tac = utils_tactics.TacticsHelper(self.get_name())
+		
+		target = self.tactics_determine_target(npc, 1)
+		npc.obj_set_obj(toee.obj_f_npc_combat_focus, target)
+
+		print("target: {}".format(target))
+		while (target):
+			if (not utils_npc_spells_tactics.STMagicMissle(npc, self.spells, tac, target).execute()):
+				break
+			tac.add_target_obj(target.id)
+			tac.add_attack()
+			tac.add_approach_single()
+			tac.add_attack()
+			tac.add_ready_vs_approach()
+			tac.add_stop()
+			break
+
+		tac.add_total_defence()
+		tac.add_stop()
+		print("create_tactics {}".format(npc))
+		return tac
+
+	def do_spell_mage_armor(self):
+		npc = self.npc_get()
+		assert isinstance(npc, toee.PyObjHandle)
+		npc.cast_spell(toee.spell_mage_armor, npc)
+		return
+
+	def do_spell_bull_strength(self):
+		npc = self.npc_get()
+		assert isinstance(npc, toee.PyObjHandle)
+		npc.cast_spell(toee.spell_bulls_strength, npc)
 		return

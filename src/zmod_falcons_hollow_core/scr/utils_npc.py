@@ -129,7 +129,12 @@ def npc_spell_ensure(npc, spell_id, stat_class, spell_level, memorize = 0):
 		npc.spell_known_add(spell_id, stat_class, spell_level, 1)
 		npc.spell_memorized_add(spell_id, stat_class, spell_level, 1)
 	else:
-		npc.spell_known_add(spell_id, stat_class, spell_level)
+		result = npc.spell_known_add(spell_id, stat_class, spell_level)
+		if (not result is None):
+			if (not result):
+				print("Spell {}({}) was not added!".format(toee.game.get_spell_mesline(spell_id), spell_id))
+				debug.breakp("npc_spell_ensure")
+				return 0
 		npc.spell_memorized_add(spell_id, stat_class, spell_level)
 	if (memorize):
 		npc.spells_pending_to_memorized()

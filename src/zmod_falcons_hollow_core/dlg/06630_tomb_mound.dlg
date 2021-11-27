@@ -12,3 +12,10 @@
 
 {60}{This chamber has suffered a cave-in and now most of it is crushed beneath tons of rock, clay,and earth.}{This chamber has suffered a cave-in and now most of it is crushed beneath tons of rock, clay,and earth.}{}{}{}{npc.destroy();cs().activate_encounter_m06()}
 {61}{Close.}{}{1}{}{0}{}
+
+{80}{Within this solemn chamber lies a single raised dais where a grand sarcophagus of carved coral rests.}{Within this solemn chamber lies a single raised dais where a grand sarcophagus of carved coral rests.}{}{}{}{cs().display_encounter_m08()}
+{81}{Continue.}{}{1}{}{82}{}
+{82}{Around the chamber, the crumbling walls are covered with murals that are now little more than smeared paint and powder.}{Around the chamber, the crumbling walls are covered with murals that are now little more than smeared paint and powder.}{}{}{}{cs().get_king_ctrl().do_spell_mage_armor()}
+{83}{Continue.}{}{1}{}{84}{}
+{84}{Amazingly, the sarcophagus itself remains closed and undisturbed.}{Amazingly, the sarcophagus itself remains closed and undisturbed.}{}{}{}{cs().get_king_ctrl().do_spell_bull_strength()}
+{89}{Close.}{}{1}{}{0}{cs().activate_encounter_m08()}

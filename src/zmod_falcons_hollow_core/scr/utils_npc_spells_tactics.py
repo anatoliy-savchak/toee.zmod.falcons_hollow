@@ -128,3 +128,8 @@ class STCauseFear(SpellTactic):
 class STShieldOfFaith(SpellTactic):
 	@staticmethod
 	def _get_spell_num(): return toee.spell_shield_of_faith
+
+class STMagicMissle(SpellTactic):
+	@staticmethod
+	def _get_spell_num(): return toee.spell_magic_missile
+	def _is_personal(self): return 0 # bug currently 2021-11-27

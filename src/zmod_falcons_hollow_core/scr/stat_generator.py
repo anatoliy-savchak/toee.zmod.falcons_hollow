@@ -21,6 +21,7 @@ class StatGenerator:
 
 		if (not score): score = 10
 		score_mod = score - dc
+		score_mod = 100
 
 		# title
 		if (1):

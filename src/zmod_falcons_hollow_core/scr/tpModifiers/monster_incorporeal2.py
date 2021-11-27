@@ -48,11 +48,11 @@ def debug_print_damages(damage_packet):
 
 def get_immune_damage(except_types, damage_packet, type, type_name):
 	if (type in except_types):
-		print('{}: bypass'.format(type_name))
+		#print('{}: bypass'.format(type_name))
 		return None
 
 	dam = damage_packet.get_overall_damage_by_type(type)
-	print('immune? {}: {}'.format(type_name, dam))
+	#print('immune? {}: {}'.format(type_name, dam))
 	if (dam > 0):
 		return (type, dam)
 	return None
@@ -111,7 +111,7 @@ def OnTakingDamage(attachee, args, evt_obj):
 		overall = evt_obj.damage_packet.get_overall_damage()
 		if (overall > 0):
 			got_list = get_immune_damages(evt_obj.damage_packet, [toee.D20DT_FORCE, toee.D20DT_NEGATIVE_ENERGY, toee.D20DT_POSITIVE_ENERGY])
-			print("got_list: ".format(got_list))
+			#print("got_list: ".format(got_list))
 
 			if (got_list):
 				is_success, miss_chance_roll = roll_miss_chance()
