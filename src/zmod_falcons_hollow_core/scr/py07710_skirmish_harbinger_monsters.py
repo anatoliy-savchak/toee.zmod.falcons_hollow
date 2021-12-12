@@ -647,7 +647,7 @@ class CtrlLGSwordofHeironeous(CtrlSkirmisherLG):
 
 		self._hide_loot(utils_item.item_create_in_inventory(const_proto_cloth.PROTO_CLOTH_BOOTS_GILDED_BOOTS, npc))
 		self._hide_loot(utils_item.item_create_in_inventory(const_proto_cloth.PROTO_CLOTH_GLOVES_GILDED_GLOVES, npc))
-		self._hide_loot(utils_item.item_create_in_inventory(const_proto_cloth.PROTO_CLOTH_HELM_PLUMED_SILVER, npc))
+		#self._hide_loot(utils_item.item_create_in_inventory(const_proto_cloth.PROTO_CLOTH_HELM_PLUMED_SILVER, npc))
 		self._hide_loot(utils_item.item_create_in_inventory(const_proto_armor.PROTO_ARMOR_FULL_PLATE, npc))
 		self._hide_loot(utils_item.item_create_in_inventory(const_proto_armor.PROTO_SHIELD_LARGE_STEEL, npc))
 
@@ -662,3 +662,7 @@ class CtrlLGSwordofHeironeous(CtrlSkirmisherLG):
 		utils_npc.npc_generate_hp_avg_first(npc)
 		npc.item_wield_best_all()
 		return
+
+class CtrlLGSwordofHeironeousAsPC(CtrlLGSwordofHeironeous):
+	@classmethod
+	def get_proto_id(cls): return const_proto_npc.PROTO_PC_HUMAN_WOMAN
