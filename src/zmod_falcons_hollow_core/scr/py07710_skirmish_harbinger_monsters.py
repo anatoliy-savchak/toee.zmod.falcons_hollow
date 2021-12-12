@@ -60,7 +60,7 @@ class CtrlLGClericOfOrder(CtrlSkirmisherLG):
 	# SPELLS: 1st-command ** (range 6; Stun; DC 13), shield of faith * (touch; +2 AC); 2nd—major resistance ** (touch; Save +3).
 	#
 	@classmethod
-	def get_proto_id(cls): return const_proto_npc.PROTO_NPC_MAN #13000 #
+	def get_proto_id(cls): return const_proto_npc.PROTO_NPC_MAN
 
 	@classmethod
 	def get_commander_level(cls): return 5
@@ -309,7 +309,7 @@ class CtrlLGEvokersApprentice(CtrlSkirmisherLG):
 	# SPELLS: 1st—magic missile * (sight; 5 damage), magic weapon * (touch; attack +1, ignore DR).
 	#
 	@classmethod
-	def get_proto_id(cls): return const_proto_npc.PROTO_NPC_MAN #13000 #
+	def get_proto_id(cls): return const_proto_npc.PROTO_NPC_MAN
 
 	@classmethod
 	def get_price(cls): return 10
@@ -447,5 +447,40 @@ class CtrlLGHoundArchon(CtrlSkirmisherLG):
 		self._hide_loot(utils_item.item_create_in_inventory(const_proto_weapon.PROTO_WEAPON_GREATSWORD, npc))
 
 		utils_npc.npc_generate_hp_avg_first(npc, 0)
+		npc.item_wield_best_all()
+		return
+
+class CtrlLGHumanCommoner(CtrlSkirmisherLG):
+	@classmethod
+	def get_proto_id(cls): return const_proto_npc.PROTO_NPC_MAN
+
+	@classmethod
+	def get_price(cls): return 3
+
+	def after_created(self, npc):
+		assert isinstance(npc, toee.PyObjHandle)
+
+		utils_npc.npc_hitdice_set(npc, 1, 4, 0)
+		utils_npc.npc_abilities_set(npc, [10, 10, 12, 10, 10, 8])
+
+		npc.obj_set_int(toee.obj_f_critter_portrait, 6210) #NPC_6211_m_Tupperelo
+		npc.obj_set_int(toee.obj_f_critter_alignment, self.get_alignment_group())
+		npc.obj_set_int(toee.obj_f_critter_deity, toee.DEITY_HEIRONEOUS)
+
+		self.setup_name(npc, "Human Commoner")
+
+		hairStyle = utils_npc.HairStyle.from_npc(npc)
+		hairStyle.style = const_toee.hair_style_shorthair
+		hairStyle.color = const_toee.hair_color_black
+		hairStyle.update_npc(npc)
+
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_cloth.PROTO_CLOTH_BOOTS_LEATHER_BOOTS_BLACK, npc))
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_cloth.PROTO_CLOTH_GARB_VILLAGER_GREEN, npc))
+		#self._hide_loot(utils_item.item_create_in_inventory(const_proto_cloth.PROTO_CLOTH_CIRCLET_HOODLESS, npc))
+		
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_weapon.PROTO_WEAPON_SCYTHE, npc))
+
+		npc.feat_add(toee.feat_martial_weapon_proficiency_scythe, 1)
+		utils_npc.npc_generate_hp_avg_first(npc, 1)
 		npc.item_wield_best_all()
 		return

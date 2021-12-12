@@ -186,7 +186,7 @@ PROTO_WEAPON_RANSEUR = 4119 # Cost 10 gp, Dmg: 2d4
 PROTO_WEAPON_RANSEUR_MASTERWORK = 4186 # Cost 10 gp, Dmg: 2d4, Masterwork
 PROTO_WEAPON_RANSEUR_PLUS_1_HOLY = 4219 # Cost 18315 gp, Dmg: 2d4, Ench: +1, Weapon Holy
 
-PROTO_WEAPON_SCYTHE = 4172 # Cost 18 gp, Dmg: 2d4
+PROTO_WEAPON_SCYTHE = 4072 # Cost 18 gp, Dmg: 2d4
 PROTO_WEAPON_SCYTHE_MASTERWORK = 4170 # Cost 318 gp, Dmg: 2d4, Masterwork
 
 # Martial Ranged Weapons
