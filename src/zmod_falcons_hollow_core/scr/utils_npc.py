@@ -83,7 +83,7 @@ def npc_generate_hp_random_first(npc):
 	print("Random HP {} (w/o con: {})={} for {}".format(hp, pts, lines, npc))
 	return (pts, lines)
 
-def npc_generate_hp_avg_first(npc, ignore_hd = 0):
+def npc_generate_hp_avg_first(npc, hd_first_is_full = 1):
 	assert isinstance(npc, toee.PyObjHandle)
 	hd = npc.hit_dice
 
@@ -93,12 +93,20 @@ def npc_generate_hp_avg_first(npc, ignore_hd = 0):
 	# con bonus applied in GlobalMaxHPCalc
 	pts = 0
 	lines = []
-	if (not ignore_hd and (hd.size or hd.bonus)):
+	if (hd.size or hd.bonus):
 		dstr = "{}d{}".format(hd.number, hd.size)
-		dice = toee.dice_new(dstr)
-		hp = dice.roll()
-		lines.append("{} = {}".format(dstr, hp))
-		pts += hp
+		print(dstr)
+		d = hd.size
+		for i in range(1, hd.number+1):
+			full = hd_first_is_full and i == 1
+			dstr = "r d{}/2".format(d) if (not full) else "r d{}".format(d)
+			hp = d // 2 if (not full) else d
+			if (i % 2 == 0 and i > 1): 
+				hp += 1
+				dstr += " + 1"
+			pts += hp + hd.bonus
+			s = "{}: {}={}".format(i, dstr, hp)
+			lines.append(s)
 
 	i = 0
 	for c in npc.char_classes:

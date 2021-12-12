@@ -115,7 +115,7 @@ class CtrlLGClericOfOrder(CtrlSkirmisherLG):
 		npc.spell_memorized_add(toee.spell_resist_elements, toee.stat_level_cleric, 2)
 		npc.spells_pending_to_memorized()
 
-		utils_npc.npc_generate_hp_avg_first(npc, 1)
+		utils_npc.npc_generate_hp_avg_first(npc)
 		npc.item_wield_best_all()
 		return
 
@@ -187,7 +187,7 @@ class CtrlLGClericOfYondalla(CtrlSkirmisherLG):
 		npc.spell_memorized_add(toee.spell_magic_weapon, toee.stat_level_cleric, 1)
 		npc.spells_pending_to_memorized()
 
-		utils_npc.npc_generate_hp_avg_first(npc, 1)
+		utils_npc.npc_generate_hp_avg_first(npc)
 		npc.item_wield_best_all()
 		return
 
@@ -243,7 +243,7 @@ class CtrlLGDwarfAxefighter(CtrlSkirmisherLG):
 
 		self._hide_loot(utils_item.item_create_in_inventory(const_proto_weapon.PROTO_BATTLEAXE_MASTERWORK, npc))
 
-		utils_npc.npc_generate_hp_avg_first(npc, 1)
+		utils_npc.npc_generate_hp_avg_first(npc)
 		npc.item_wield_best_all()
 		return
 
@@ -301,7 +301,7 @@ class CtrlLGEmberHumanMonk(CtrlSkirmisherLG):
 		item = self._hide_loot(utils_item.item_create_in_inventory(const_proto_weapon.PROTO_WEAPON_QUARTERSTAFF, npc))
 		item.item_condition_add_with_args("Weapon Enhancement Bonus", 1)
 
-		utils_npc.npc_generate_hp_avg_first(npc, 1)
+		utils_npc.npc_generate_hp_avg_first(npc)
 		npc.item_wield_best_all()
 		return
 
@@ -354,7 +354,7 @@ class CtrlLGEvokersApprentice(CtrlSkirmisherLG):
 		npc.spell_memorized_add(toee.spell_magic_weapon, toee.stat_level_wizard, 1)
 		npc.spells_pending_to_memorized()
 
-		utils_npc.npc_generate_hp_avg_first(npc, 1)
+		utils_npc.npc_generate_hp_avg_first(npc)
 		npc.item_wield_best_all()
 		return
 
@@ -408,8 +408,44 @@ class CtrlLGHalflingVeteran(CtrlSkirmisherLG):
 		dagger1 = self._hide_loot(utils_item.item_create_in_inventory(const_proto_weapon.PROTO_WEAPON_DAGGER_MASTERWORK, npc))
 		dagger2 = self._hide_loot(utils_item.item_create_in_inventory(const_proto_weapon.PROTO_WEAPON_DAGGER_MASTERWORK, npc))
 
-		utils_npc.npc_generate_hp_avg_first(npc, 1)
+		utils_npc.npc_generate_hp_avg_first(npc)
 		npc.item_wield_best_all()
 		npc.item_wield(dagger1, toee.item_wear_weapon_primary)
 		npc.item_wield(dagger2, toee.item_wear_weapon_secondary)
+		return
+
+class CtrlLGHoundArchon(CtrlSkirmisherLG):
+	@classmethod
+	def get_proto_id(cls): return const_proto_npc.PROTO_NPC_JACKALWERE_EMPTY
+
+	@classmethod
+	def get_price(cls): return 31
+
+	def after_created(self, npc):
+		assert isinstance(npc, toee.PyObjHandle)
+
+		utils_npc.npc_hitdice_set(npc, 6, 8, 0)
+		utils_npc.npc_abilities_set(npc, [15, 10, 13, 10, 13, 12])
+
+		#npc.obj_set_int(toee.obj_f_critter_portrait, 2500) #HAM_2500_b_rogue
+		npc.obj_set_int(toee.obj_f_critter_alignment, self.get_alignment_group())
+		npc.obj_set_int(toee.obj_f_critter_deity, toee.DEITY_HEIRONEOUS)
+		npc.obj_set_int(toee.obj_f_npc_ac_bonus, 9) # natural ac
+		npc.obj_set_int(toee.obj_f_npc_save_fortitude_bonus, 5)
+		npc.obj_set_int(toee.obj_f_npc_save_reflexes_bonus, 5)
+		npc.obj_set_int(toee.obj_f_npc_save_willpower_bonus, 5)
+
+		npc.feat_add(toee.feat_improved_initiative, 0)
+		npc.feat_add(toee.feat_power_attack, 1)
+
+		#npc.condition_add_with_args("Base_Attack_Bonus1", 5)
+		#npc.condition_add("Base_Attack_Bonus5")
+		npc.condition_add_with_args("Spell Resistance", 16)
+		npc.condition_add_with_args("Monster DR Magic", 5)
+
+		self.setup_name(npc, "Hound Archon")
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_weapon.PROTO_WEAPON_GREATSWORD, npc))
+
+		utils_npc.npc_generate_hp_avg_first(npc, 0)
+		npc.item_wield_best_all()
 		return
