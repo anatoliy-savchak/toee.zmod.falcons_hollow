@@ -114,7 +114,7 @@ class CtrlLGClericOfOrder(CtrlSkirmisherLG):
 		npc.spell_memorized_add(toee.spell_resist_elements, toee.stat_level_cleric, 2)
 		npc.spells_pending_to_memorized()
 
-		utils_npc.npc_generate_hp_avg_first(npc)
+		utils_npc.npc_generate_hp_avg_first(npc, 1)
 		npc.item_wield_best_all()
 		return
 
@@ -144,7 +144,7 @@ class CtrlLGClericOfYondalla(CtrlSkirmisherLG):
 		#SPD 15 (2)
 		#HP 15 = 1d8 + 1d8 + 2*x => 8 + 4 + 1 + 2*1 = 15 => con: 12
 
-		#STR: 06 due to atk is 0 = 1 bab (lv 2) + 1 small - 2 str; dmg will be 1d6-1 = 5
+		#STR: 06 due to atk is 0 = 1 bab (lv 2) + 1 small - 2 str; dmg will be 1d6-2 = 4 not 5!
 		#DEX: 12 due to AC dex mod = 1
 		#CON: 12, see HP calculation
 		#WIS: 14 due to 1st level DC: 13 => 10 + 1 lv + 2 mod wis
@@ -165,7 +165,7 @@ class CtrlLGClericOfYondalla(CtrlSkirmisherLG):
 
 		hairStyle = utils_npc.HairStyle.from_npc(npc)
 		hairStyle.style = const_toee.hair_style_shorthair
-		hairStyle.color = const_toee.hair_color_white
+		hairStyle.color = const_toee.hair_color_brown
 		hairStyle.update_npc(npc)
 
 		self._lower_weight_small(self._hide_loot(utils_item.item_create_in_inventory(const_proto_cloth.PROTO_CLOTH_BOOTS_GILDED_BOOTS, npc)))
@@ -185,10 +185,61 @@ class CtrlLGClericOfYondalla(CtrlSkirmisherLG):
 		npc.spell_memorized_add(toee.spell_magic_weapon, toee.stat_level_cleric, 1)
 		npc.spells_pending_to_memorized()
 
-		utils_npc.npc_generate_hp_avg_first(npc)
+		utils_npc.npc_generate_hp_avg_first(npc, 1)
 		npc.item_wield_best_all()
 		return
 
 class CtrlLGClericOfYondallaAsPC(CtrlLGClericOfYondalla):
 	@classmethod
 	def get_proto_id(cls): return const_proto_npc.PROTO_PC_HALFLING_MAN
+
+class CtrlLGDwarfAxefighter(CtrlSkirmisherLG):
+	# SPECIAL ABILITIES: Cleave; Save +4.
+	@classmethod
+	def get_proto_id(cls): return const_proto_npc.PROTO_NPC_DWARF_MAN
+
+	@classmethod
+	def get_price(cls): return 12
+
+	def after_created(self, npc):
+		assert isinstance(npc, toee.PyObjHandle)
+
+		npc.make_class(toee.stat_level_fighter, 3)
+		#AC 19 = 10 + 5 chain mail + 2 dex + 2 heavy shield
+		#SPD 20 (4)
+		#HP 30 = 1d10 + 2d10 + 3*x => 10 + 2*10/2 + 1 + 3*2 = 31 => con: 14
+
+		#STR: 16 due to atk is 7 = 3 bab (lv 3) + 2 str + 1 wpn foc + 1 mkw; dmg will be 1d8 + 2 = 10
+		#DEX: 12 due to AC dex mod = 1
+		#CON: 12, see HP calculation
+		#WIS: 14 due to 1st level DC: 13 => 10 + 1 lv + 2 mod wis
+		#INT: 08 any
+		#CHA: 08 due to Turn undead 2 times = 3 - 1 mod cha
+
+		utils_npc.npc_abilities_set(npc, [14, 14, 12, 8, 12, 8]) # -2 CHA, +2 CON
+
+		npc.obj_set_int(toee.obj_f_critter_portrait, 2000) #DWM_2000_b_fighter
+		npc.obj_set_int(toee.obj_f_critter_alignment, self.get_alignment_group())
+		npc.obj_set_int(toee.obj_f_critter_deity, toee.DEITY_HEIRONEOUS)
+
+		npc.feat_add(toee.feat_weapon_focus_battleaxe, 0)
+		npc.feat_add(toee.feat_cleave, 1)
+
+		self.setup_name(npc, "Dwarf Axefighter")
+
+		hairStyle = utils_npc.HairStyle.from_npc(npc)
+		hairStyle.style = const_toee.hair_style_shorthair
+		hairStyle.color = const_toee.hair_color_red
+		hairStyle.update_npc(npc)
+
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_cloth.PROTO_CLOTH_BOOTS_CHAINMAIL_BOOTS, npc))
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_cloth.PROTO_CLOTH_GLOVES_CHAINMAIL_GLOVES, npc))
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_cloth.PROTO_CLOTH_HELMET_CHAIN, npc))
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_armor.PROTO_ARMOR_CHAINMAIL, npc))
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_armor.PROTO_SHIELD_LARGE_STEEL, npc))
+
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_weapon.PROTO_BATTLEAXE_MASTERWORK, npc))
+
+		utils_npc.npc_generate_hp_avg_first(npc, 1)
+		npc.item_wield_best_all()
+		return

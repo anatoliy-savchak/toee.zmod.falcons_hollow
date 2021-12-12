@@ -76,4 +76,8 @@ def do_test():
 		npc.obj_remove_from_all_groups(first)
 		first.destroy()
 		toee.game.update_party_ui()
+
+	if (1):
+		npc, ctrl = py07710_skirmish_harbinger_monsters.CtrlLGDwarfAxefighter.create_obj_and_class(utils_obj.sec2loc(478, 482), 1, 0)
+		added = toee.game.leader.pc_add(npc)
 	return
