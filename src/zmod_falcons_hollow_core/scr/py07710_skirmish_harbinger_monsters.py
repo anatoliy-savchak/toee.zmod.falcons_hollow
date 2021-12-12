@@ -212,7 +212,7 @@ class CtrlLGDwarfAxefighter(CtrlSkirmisherLG):
 		#STR: 16 due to atk is 7 = 3 bab (lv 3) + 2 str + 1 wpn foc + 1 mkw; dmg will be 1d8 + 2 = 10
 		#DEX: 12 due to AC dex mod = 1
 		#CON: 12, see HP calculation
-		#WIS: 14 due to 1st level DC: 13 => 10 + 1 lv + 2 mod wis
+		#WIS: 12 any
 		#INT: 08 any
 		#CHA: 08 due to Turn undead 2 times = 3 - 1 mod cha
 
@@ -239,6 +239,63 @@ class CtrlLGDwarfAxefighter(CtrlSkirmisherLG):
 		self._hide_loot(utils_item.item_create_in_inventory(const_proto_armor.PROTO_SHIELD_LARGE_STEEL, npc))
 
 		self._hide_loot(utils_item.item_create_in_inventory(const_proto_weapon.PROTO_BATTLEAXE_MASTERWORK, npc))
+
+		utils_npc.npc_generate_hp_avg_first(npc, 1)
+		npc.item_wield_best_all()
+		return
+
+class CtrlLGEmberHumanMonk(CtrlSkirmisherLG):
+	# SPECIAL ABILITIES: Unique. Deflect Arrows (+4 AC against ranged attacks); Mobility (+4 AC against attacks of opportunity); Save +4; Stunning Attack ** (DC 15).
+	@classmethod
+	def get_proto_id(cls): return const_proto_npc.PROTO_NPC_WOMAN
+
+	@classmethod
+	def get_price(cls): return 18
+
+	def after_created(self, npc):
+		assert isinstance(npc, toee.PyObjHandle)
+
+		npc.make_class(toee.stat_level_monk, 6)
+		#AC 19 = 10 + 2 wis + 4 dex + 1 monk
+		#SPD 20 (4)
+		#HP 30 = 1d8 + 5d8 + 3*x => 8 + 5*(8+1)/2 + 6*1 = 36 => con: 12
+
+		#STR: 16 due to atk is 7 = 4 bab (lv 6) + 1 str + 2 wpn foc + 1 magic - 1 flurry; dmg will be 1d6 + 2 = 8
+		#DEX: 18 due to AC dex mod = 4
+		#CON: 12, see HP calculation
+		#WIS: 14 due to AC wis bonus = 2
+		#INT: 08 any
+		#CHA: 08 any
+
+		utils_npc.npc_abilities_set(npc, [12, 18, 12, 8, 14, 8]) 
+
+		npc.obj_set_int(toee.obj_f_critter_portrait, 570) #HUF_0570_b_monk
+		npc.obj_set_int(toee.obj_f_critter_alignment, self.get_alignment_group())
+		npc.obj_set_int(toee.obj_f_critter_deity, toee.DEITY_HEIRONEOUS)
+
+		npc.feat_add(toee.feat_weapon_focus_quarterstaff, 0)
+		npc.feat_add(toee.feat_greater_weapon_focus_quarterstaff, 0)
+		npc.feat_add(toee.feat_dodge, 0)
+		npc.feat_add(toee.feat_weapon_finesse_quarterstaff, 0)
+		npc.feat_add(toee.feat_mobility, 1)
+
+		self.setup_name(npc, "Ember, Human Monk")
+
+		hairStyle = utils_npc.HairStyle.from_npc(npc)
+		hairStyle.style = const_toee.hair_style_ponytail
+		hairStyle.color = const_toee.hair_color_black
+		hairStyle.update_npc(npc)
+
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_cloth.PROTO_CLOTH_BOOTS_MONK, npc))
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_cloth.PROTO_CLOTH_MONK_OUTFIT, npc))
+		
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_cloth.PROTO_CLOTH_MONK_OUTFIT, npc))
+
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_wondrous.PROTO_WONDROUS_BRACERS_OF_ARMOR_PLUS_2, npc))
+		#self._hide_loot(utils_item.item_create_in_inventory(const_proto_wondrous.PROTO_WONDROUS_AMULET_OF_NATURAL_ARMOR_PLUS_1, npc))
+
+		item = self._hide_loot(utils_item.item_create_in_inventory(const_proto_weapon.PROTO_WEAPON_QUARTERSTAFF, npc))
+		item.item_condition_add_with_args("Weapon Enhancement Bonus", 1)
 
 		utils_npc.npc_generate_hp_avg_first(npc, 1)
 		npc.item_wield_best_all()
