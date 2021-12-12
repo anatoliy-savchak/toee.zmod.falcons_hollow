@@ -106,7 +106,7 @@ def npc_generate_hp_avg_first(npc, ignore_hd = 0):
 		d = char_class_get_hit_dice(c)
 		dstr = "d{}/2".format(d) if (i != 1) else "d{}".format(d)
 		hp = d // 2 if (i != 1) else d
-		if (i % 2 == 0): 
+		if (i % 2 == 0 and i > 1): 
 			hp += 1
 			dstr += " + 1"
 		pts += hp

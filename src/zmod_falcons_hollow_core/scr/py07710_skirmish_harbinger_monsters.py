@@ -71,6 +71,7 @@ class CtrlLGClericOfOrder(CtrlSkirmisherLG):
 	def after_created(self, npc):
 		assert isinstance(npc, toee.PyObjHandle)
 
+		utils_npc.npc_hitdice_set(npc, 0, 0, 0)
 		npc.make_class(toee.stat_level_cleric, 4)
 		#AC 16 = 10 + 4 chain shirt + 2 dex
 		#SPD 40 (6) should be light armor
@@ -139,6 +140,7 @@ class CtrlLGClericOfYondalla(CtrlSkirmisherLG):
 	def after_created(self, npc):
 		assert isinstance(npc, toee.PyObjHandle)
 
+		utils_npc.npc_hitdice_set(npc, 0, 0, 0)
 		npc.make_class(toee.stat_level_cleric, 2)
 		#AC 23 = 10 + 8 full plate + 1 dex + 1 small being + 3 heavy shield +1
 		#SPD 15 (2)
@@ -204,6 +206,7 @@ class CtrlLGDwarfAxefighter(CtrlSkirmisherLG):
 	def after_created(self, npc):
 		assert isinstance(npc, toee.PyObjHandle)
 
+		utils_npc.npc_hitdice_set(npc, 0, 0, 0)
 		npc.make_class(toee.stat_level_fighter, 3)
 		#AC 19 = 10 + 5 chain mail + 2 dex + 2 heavy shield
 		#SPD 20 (4)
@@ -255,6 +258,7 @@ class CtrlLGEmberHumanMonk(CtrlSkirmisherLG):
 	def after_created(self, npc):
 		assert isinstance(npc, toee.PyObjHandle)
 
+		utils_npc.npc_hitdice_set(npc, 0, 0, 0)
 		npc.make_class(toee.stat_level_monk, 6)
 		#AC 19 = 10 + 2 wis + 4 dex + 1 monk
 		#SPD 20 (4)
@@ -296,6 +300,59 @@ class CtrlLGEmberHumanMonk(CtrlSkirmisherLG):
 
 		item = self._hide_loot(utils_item.item_create_in_inventory(const_proto_weapon.PROTO_WEAPON_QUARTERSTAFF, npc))
 		item.item_condition_add_with_args("Weapon Enhancement Bonus", 1)
+
+		utils_npc.npc_generate_hp_avg_first(npc, 1)
+		npc.item_wield_best_all()
+		return
+
+class CtrlLGEvokersApprentice(CtrlSkirmisherLG):
+	# SPELLS: 1st—magic missile * (sight; 5 damage), magic weapon * (touch; attack +1, ignore DR).
+	#
+	@classmethod
+	def get_proto_id(cls): return const_proto_npc.PROTO_NPC_MAN #13000 #
+
+	@classmethod
+	def get_price(cls): return 10
+
+	def after_created(self, npc):
+		assert isinstance(npc, toee.PyObjHandle)
+
+		utils_npc.npc_hitdice_set(npc, 0, 0, 0)
+		npc.make_class(toee.stat_level_wizard, 1)
+		#AC 12 = 10 + 2 dex
+		#SPD 30 (6) should be light armor
+		#HP 5 = 1d4 + 1 => con: 12
+
+		#STR: 8 atk 0
+		#DEX: 14 due to AC dex mod = 2
+		#CON: 12, see HP calculation
+		#INT: 12 wiz
+		#WIS: 12 
+		#CHA: 8 any
+
+		utils_npc.npc_abilities_set(npc, [10, 14, 12, 12, 12, 8])
+
+		npc.obj_set_int(toee.obj_f_critter_portrait, 6200) #NPC_6201_m_Mickey
+		npc.obj_set_int(toee.obj_f_critter_alignment, self.get_alignment_group())
+		npc.obj_set_int(toee.obj_f_critter_deity, toee.DEITY_HEIRONEOUS)
+
+		self.setup_name(npc, "Evoker's Apprentice")
+
+		hairStyle = utils_npc.HairStyle.from_npc(npc)
+		hairStyle.style = const_toee.hair_style_shorthair
+		hairStyle.color = const_toee.hair_color_blonde
+		hairStyle.update_npc(npc)
+
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_cloth.PROTO_CLOTH_BOOTS_LEATHER_BOOTS_WHITE, npc))
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_cloth.PROTO_CLOTH_ROBES_GREEN, npc))
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_cloth.PROTO_CLOTH_CIRCLET_HOODLESS, npc))
+		
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_weapon.PROTO_WEAPON_QUARTERSTAFF, npc))
+
+		npc.spells_memorized_forget()
+		npc.spell_memorized_add(toee.spell_magic_missile, toee.stat_level_wizard, 1)
+		npc.spell_memorized_add(toee.spell_magic_weapon, toee.stat_level_wizard, 1)
+		npc.spells_pending_to_memorized()
 
 		utils_npc.npc_generate_hp_avg_first(npc, 1)
 		npc.item_wield_best_all()
