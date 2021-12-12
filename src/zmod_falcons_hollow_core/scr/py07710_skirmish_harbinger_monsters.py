@@ -525,3 +525,41 @@ class CtrlLGLargeEarthElemental(CtrlSkirmisherLG):
 		utils_npc.npc_generate_hp_avg_first(npc, 0)
 		npc.item_wield_best_all()
 		return
+
+
+class CtrlLGManAtArms(CtrlSkirmisherLG):
+	@classmethod
+	def get_proto_id(cls): return const_proto_npc.PROTO_NPC_MAN
+
+	@classmethod
+	def get_price(cls): return 3
+
+	def after_created(self, npc):
+		assert isinstance(npc, toee.PyObjHandle)
+
+		utils_npc.npc_hitdice_set(npc, 1, 4, 0)
+		utils_npc.npc_abilities_set(npc, [10, 10, 12, 10, 10, 8])
+
+		npc.obj_set_int(toee.obj_f_critter_portrait, 6880) #NPC_6881_m_L_Guard
+		npc.obj_set_int(toee.obj_f_critter_alignment, self.get_alignment_group())
+		npc.obj_set_int(toee.obj_f_critter_deity, toee.DEITY_HEIRONEOUS)
+
+		self.setup_name(npc, "Man-at-Arms")
+
+		hairStyle = utils_npc.HairStyle.from_npc(npc)
+		hairStyle.style = const_toee.hair_style_shorthair
+		hairStyle.color = const_toee.hair_color_black
+		hairStyle.update_npc(npc)
+
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_cloth.PROTO_CLOTH_BOOTS_GILDED_BOOTS, npc))
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_cloth.PROTO_CLOTH_GLOVES_GILDED_GLOVES, npc))
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_cloth.PROTO_CLOTH_HELM_GREAT, npc))
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_armor.PROTO_ARMOR_HALF_PLATE, npc))
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_armor.PROTO_SHIELD_LARGE_STEEL, npc))
+
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_weapon.PROTO_WEAPON_SHORTSWORD, npc))
+
+		npc.feat_add(toee.feat_martial_weapon_proficiency_short_sword, 1)
+		utils_npc.npc_generate_hp_avg_first(npc, 1)
+		npc.item_wield_best_all()
+		return
