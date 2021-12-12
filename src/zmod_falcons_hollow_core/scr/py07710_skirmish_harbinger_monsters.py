@@ -50,6 +50,9 @@ class CtrlSkirmisher(ctrl_behaviour.CtrlBehaviour):
 		item.obj_set_int(toee.obj_f_item_weight, item.obj_get_int(toee.obj_f_item_weight) // 2)
 		return item
 
+	@classmethod
+	def get_title(cls): return None
+
 class CtrlSkirmisherLG(CtrlSkirmisher):
 	@classmethod
 	def get_alignment_group(cls): return toee.ALIGNMENT_LAWFUL_GOOD
@@ -67,6 +70,9 @@ class CtrlLGClericOfOrder(CtrlSkirmisherLG):
 
 	@classmethod
 	def get_price(cls): return 24
+
+	@classmethod
+	def get_title(cls): return "Cleric of Order"
 
 	def after_created(self, npc):
 		assert isinstance(npc, toee.PyObjHandle)
@@ -92,7 +98,7 @@ class CtrlLGClericOfOrder(CtrlSkirmisherLG):
 		npc.obj_set_int(toee.obj_f_critter_domain_1, toee.good)
 		npc.obj_set_int(toee.obj_f_critter_domain_1, toee.law)
 
-		self.setup_name(npc, "Cleric of Order")
+		self.setup_name(npc, self.get_title())
 
 		hairStyle = utils_npc.HairStyle.from_npc(npc)
 		hairStyle.style = const_toee.hair_style_shorthair
@@ -137,6 +143,9 @@ class CtrlLGClericOfYondalla(CtrlSkirmisherLG):
 	@classmethod
 	def get_price(cls): return 14
 
+	@classmethod
+	def get_title(cls): return "Cleric of Yondalla"
+
 	def after_created(self, npc):
 		assert isinstance(npc, toee.PyObjHandle)
 
@@ -163,7 +172,7 @@ class CtrlLGClericOfYondalla(CtrlSkirmisherLG):
 
 		npc.feat_add(toee.feat_martial_weapon_proficiency_short_sword, 1)
 
-		self.setup_name(npc, "Cleric of Yondalla")
+		self.setup_name(npc, self.get_title())
 
 		hairStyle = utils_npc.HairStyle.from_npc(npc)
 		hairStyle.style = const_toee.hair_style_shorthair
@@ -203,6 +212,9 @@ class CtrlLGDwarfAxefighter(CtrlSkirmisherLG):
 	@classmethod
 	def get_price(cls): return 12
 
+	@classmethod
+	def get_title(cls): return "Dwarf Axefighter"
+
 	def after_created(self, npc):
 		assert isinstance(npc, toee.PyObjHandle)
 
@@ -228,7 +240,7 @@ class CtrlLGDwarfAxefighter(CtrlSkirmisherLG):
 		npc.feat_add(toee.feat_weapon_focus_battleaxe, 0)
 		npc.feat_add(toee.feat_cleave, 1)
 
-		self.setup_name(npc, "Dwarf Axefighter")
+		self.setup_name(npc, self.get_title())
 
 		hairStyle = utils_npc.HairStyle.from_npc(npc)
 		hairStyle.style = const_toee.hair_style_shorthair
@@ -254,6 +266,9 @@ class CtrlLGEmberHumanMonk(CtrlSkirmisherLG):
 
 	@classmethod
 	def get_price(cls): return 18
+
+	@classmethod
+	def get_title(cls): return "Ember, Human Monk"
 
 	def after_created(self, npc):
 		assert isinstance(npc, toee.PyObjHandle)
@@ -283,7 +298,7 @@ class CtrlLGEmberHumanMonk(CtrlSkirmisherLG):
 		npc.feat_add(toee.feat_weapon_finesse_quarterstaff, 0)
 		npc.feat_add(toee.feat_mobility, 1)
 
-		self.setup_name(npc, "Ember, Human Monk")
+		self.setup_name(npc, self.get_title())
 
 		hairStyle = utils_npc.HairStyle.from_npc(npc)
 		hairStyle.style = const_toee.hair_style_ponytail
@@ -314,6 +329,9 @@ class CtrlLGEvokersApprentice(CtrlSkirmisherLG):
 	@classmethod
 	def get_price(cls): return 10
 
+	@classmethod
+	def get_title(cls): return "Evoker's Apprentice"
+
 	def after_created(self, npc):
 		assert isinstance(npc, toee.PyObjHandle)
 
@@ -336,7 +354,7 @@ class CtrlLGEvokersApprentice(CtrlSkirmisherLG):
 		npc.obj_set_int(toee.obj_f_critter_alignment, self.get_alignment_group())
 		npc.obj_set_int(toee.obj_f_critter_deity, toee.DEITY_HEIRONEOUS)
 
-		self.setup_name(npc, "Evoker's Apprentice")
+		self.setup_name(npc, self.get_title())
 
 		hairStyle = utils_npc.HairStyle.from_npc(npc)
 		hairStyle.style = const_toee.hair_style_shorthair
@@ -364,6 +382,9 @@ class CtrlLGHalflingVeteran(CtrlSkirmisherLG):
 
 	@classmethod
 	def get_price(cls): return 11
+
+	@classmethod
+	def get_title(cls): return "Halfling Veteran"
 
 	def after_created(self, npc):
 		assert isinstance(npc, toee.PyObjHandle)
@@ -393,7 +414,7 @@ class CtrlLGHalflingVeteran(CtrlSkirmisherLG):
 		npc.feat_add(toee.feat_weapon_finesse_dagger, 0)
 		npc.feat_add(toee.feat_two_weapon_fighting, 1)
 
-		self.setup_name(npc, "Halfling Veteran")
+		self.setup_name(npc, self.get_title())
 
 		hairStyle = utils_npc.HairStyle.from_npc(npc)
 		hairStyle.style = const_toee.hair_style_shorthair
@@ -421,6 +442,9 @@ class CtrlLGHoundArchon(CtrlSkirmisherLG):
 	@classmethod
 	def get_price(cls): return 31
 
+	@classmethod
+	def get_title(cls): return "Hound Archon"
+
 	def after_created(self, npc):
 		assert isinstance(npc, toee.PyObjHandle)
 
@@ -443,7 +467,7 @@ class CtrlLGHoundArchon(CtrlSkirmisherLG):
 		npc.condition_add_with_args("Spell Resistance", 16)
 		npc.condition_add_with_args("Monster DR Magic", 5)
 
-		self.setup_name(npc, "Hound Archon")
+		self.setup_name(npc, self.get_title())
 		self._hide_loot(utils_item.item_create_in_inventory(const_proto_weapon.PROTO_WEAPON_GREATSWORD, npc))
 
 		utils_npc.npc_generate_hp_avg_first(npc, 0)
@@ -457,6 +481,9 @@ class CtrlLGHumanCommoner(CtrlSkirmisherLG):
 	@classmethod
 	def get_price(cls): return 3
 
+	@classmethod
+	def get_title(cls): return "Human Commoner"
+
 	def after_created(self, npc):
 		assert isinstance(npc, toee.PyObjHandle)
 
@@ -467,7 +494,7 @@ class CtrlLGHumanCommoner(CtrlSkirmisherLG):
 		npc.obj_set_int(toee.obj_f_critter_alignment, self.get_alignment_group())
 		npc.obj_set_int(toee.obj_f_critter_deity, toee.DEITY_HEIRONEOUS)
 
-		self.setup_name(npc, "Human Commoner")
+		self.setup_name(npc, self.get_title())
 
 		hairStyle = utils_npc.HairStyle.from_npc(npc)
 		hairStyle.style = const_toee.hair_style_shorthair
@@ -491,6 +518,9 @@ class CtrlLGLargeEarthElemental(CtrlSkirmisherLG):
 
 	@classmethod
 	def get_price(cls): return 35
+
+	@classmethod
+	def get_title(cls): return "Large Earth Elemental"
 
 	def after_created(self, npc):
 		assert isinstance(npc, toee.PyObjHandle)
@@ -519,7 +549,7 @@ class CtrlLGLargeEarthElemental(CtrlSkirmisherLG):
 		npc.condition_add("Monster Plant")
 		npc.condition_add_with_args("Monster DR Magic", 5)
 
-		self.setup_name(npc, "Large Earth Elemental")
+		self.setup_name(npc, self.get_title())
 		#self._hide_loot(utils_item.item_create_in_inventory(const_proto_weapon.PROTO_WEAPON_GREATSWORD, npc))
 
 		utils_npc.npc_generate_hp_avg_first(npc, 0)
@@ -534,6 +564,9 @@ class CtrlLGManAtArms(CtrlSkirmisherLG):
 	@classmethod
 	def get_price(cls): return 3
 
+	@classmethod
+	def get_title(cls): return "Man-at-Arms"
+
 	def after_created(self, npc):
 		assert isinstance(npc, toee.PyObjHandle)
 
@@ -544,7 +577,7 @@ class CtrlLGManAtArms(CtrlSkirmisherLG):
 		npc.obj_set_int(toee.obj_f_critter_alignment, self.get_alignment_group())
 		npc.obj_set_int(toee.obj_f_critter_deity, toee.DEITY_HEIRONEOUS)
 
-		self.setup_name(npc, "Man-at-Arms")
+		self.setup_name(npc, self.get_title())
 
 		hairStyle = utils_npc.HairStyle.from_npc(npc)
 		hairStyle.style = const_toee.hair_style_shorthair
@@ -561,5 +594,71 @@ class CtrlLGManAtArms(CtrlSkirmisherLG):
 
 		npc.feat_add(toee.feat_martial_weapon_proficiency_short_sword, 1)
 		utils_npc.npc_generate_hp_avg_first(npc, 1)
+		npc.item_wield_best_all()
+		return
+
+class CtrlLGSwordofHeironeous(CtrlSkirmisherLG):
+	# COMMANDER EFFECT: Attack +2 against larger creatures. WARBAND BUILDING: Halflings of any faction are legal in your warband.
+	# SPECIAL ABILITIES: Fearless; Smite Evil +5 *.	
+	# SPELLS: 2nd—cure moderate wounds * (touch; heal 10 hp).
+	#
+	@classmethod
+	def get_proto_id(cls): return const_proto_npc.PROTO_NPC_WOMAN
+
+	@classmethod
+	def get_commander_level(cls): return 7
+
+	@classmethod
+	def get_price(cls): return 29
+
+	@classmethod
+	def get_title(cls): return "Sword of Heironeous"
+
+	def after_created(self, npc):
+		assert isinstance(npc, toee.PyObjHandle)
+
+		utils_npc.npc_hitdice_set(npc, 0, 0, 0)
+		npc.make_class(toee.stat_level_paladin, 5)
+		#AC 23 = 10 + 8 full plate + 2 heavy shield
+		#SPD 20 (4)
+		#HP 35 => con: 12
+
+		#STR: 14 due to atk is 8 = 5 bab (lv 5) + 2 str + 1 magic; dmg will be 1d8+3 = 11 not 10!
+		#DEX: 10 due to AC dex mod = 0
+		#CON: 12, see HP calculation
+		#WIS: 14
+		#INT: 08 any
+		#CHA: 10 as Smite Evil +5 = +5 lv + 0 cha
+
+		utils_npc.npc_abilities_set(npc, [14, 10, 12, 14, 8, 10])
+
+		npc.obj_set_int(toee.obj_f_critter_portrait, 580) #HUF_0580_b_paladin
+		npc.obj_set_int(toee.obj_f_critter_alignment, self.get_alignment_group())
+		npc.obj_set_int(toee.obj_f_critter_deity, toee.DEITY_HEIRONEOUS)
+		npc.obj_set_int(toee.obj_f_critter_domain_1, toee.good)
+		npc.obj_set_int(toee.obj_f_critter_domain_1, toee.protection)
+
+		self.setup_name(npc, self.get_title())
+
+		hairStyle = utils_npc.HairStyle.from_npc(npc)
+		hairStyle.style = const_toee.hair_style_medium
+		hairStyle.color = const_toee.hair_color_blonde
+		hairStyle.update_npc(npc)
+
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_cloth.PROTO_CLOTH_BOOTS_GILDED_BOOTS, npc))
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_cloth.PROTO_CLOTH_GLOVES_GILDED_GLOVES, npc))
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_cloth.PROTO_CLOTH_HELM_PLUMED_SILVER, npc))
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_armor.PROTO_ARMOR_FULL_PLATE, npc))
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_armor.PROTO_SHIELD_LARGE_STEEL, npc))
+
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_cloth.PROTO_CLOAK_BLUE, npc))
+
+		self._hide_loot(utils_item.item_create_in_inventory(const_proto_weapon.PROTO_LONGSWORD_PLUS_1, npc))
+
+		npc.spells_memorized_forget()
+		npc.spell_memorized_add(toee.spell_cure_moderate_wounds, toee.stat_level_paladin, 1)
+		npc.spells_pending_to_memorized()
+
+		utils_npc.npc_generate_hp_avg_first(npc)
 		npc.item_wield_best_all()
 		return

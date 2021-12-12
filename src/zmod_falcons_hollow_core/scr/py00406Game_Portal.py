@@ -78,6 +78,6 @@ def do_test():
 		toee.game.update_party_ui()
 
 	if (1):
-		npc, ctrl = py07710_skirmish_harbinger_monsters.CtrlLGManAtArms.create_obj_and_class(utils_obj.sec2loc(478, 482), 1, 0)
+		npc, ctrl = py07710_skirmish_harbinger_monsters.CtrlLGSwordofHeironeous.create_obj_and_class(utils_obj.sec2loc(478, 482), 1, 0)
 		added = toee.game.leader.pc_add(npc)
 	return
