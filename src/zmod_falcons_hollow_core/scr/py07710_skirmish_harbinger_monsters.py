@@ -357,3 +357,59 @@ class CtrlLGEvokersApprentice(CtrlSkirmisherLG):
 		utils_npc.npc_generate_hp_avg_first(npc, 1)
 		npc.item_wield_best_all()
 		return
+
+class CtrlLGHalflingVeteran(CtrlSkirmisherLG):
+	@classmethod
+	def get_proto_id(cls): return const_proto_npc.PROTO_NPC_HALFLING_MAN
+
+	@classmethod
+	def get_price(cls): return 11
+
+	def after_created(self, npc):
+		assert isinstance(npc, toee.PyObjHandle)
+
+		utils_npc.npc_hitdice_set(npc, 0, 0, 0)
+		npc.make_class(toee.stat_level_fighter, 5)
+		#AC 19 = 10 + 5 chain mail + 2 dex + 1 dodge + 1 twd
+		#SPD 20 (4)
+		#HP 35 = 1d10 + 4d10 + 3*x => 32 + 5*1 = 37 => con: 12
+
+		#STR: 14 due to atk is 9 = 5 bab (lv 5) + 4 dex + 1 wpf + 1 mkw - 2 twf; dmg will be 1d4 + 1 = 5, str-2
+		#DEX: 18 due to AC dex mod = 3 and 4 finesse
+		#CON: 12, see HP calculation
+		#INT: 08 any
+		#WIS: 10
+		#CHA: 08 any
+
+		utils_npc.npc_abilities_set(npc, [14, 16, 12, 8, 10, 8]) # -2 STR, +2 DEX
+
+		npc.obj_set_int(toee.obj_f_critter_portrait, 2500) #HAM_2500_b_rogue
+		npc.obj_set_int(toee.obj_f_critter_alignment, self.get_alignment_group())
+		npc.obj_set_int(toee.obj_f_critter_deity, toee.DEITY_HEIRONEOUS)
+
+		#npc.feat_add(toee.feat_weapon_focus_dagger, 0)
+		#npc.feat_add(toee.feat_greater_weapon_focus_quarterstaff, 0)
+		npc.feat_add(toee.feat_dodge, 0)
+		npc.feat_add(toee.feat_weapon_finesse_dagger, 0)
+		npc.feat_add(toee.feat_two_weapon_fighting, 1)
+
+		self.setup_name(npc, "Halfling Veteran")
+
+		hairStyle = utils_npc.HairStyle.from_npc(npc)
+		hairStyle.style = const_toee.hair_style_shorthair
+		hairStyle.color = const_toee.hair_color_black
+		hairStyle.update_npc(npc)
+
+		self._lower_weight_small(self._hide_loot(utils_item.item_create_in_inventory(const_proto_cloth.PROTO_CLOTH_BOOTS_CHAINMAIL_BOOTS, npc)))
+		self._lower_weight_small(self._hide_loot(utils_item.item_create_in_inventory(const_proto_cloth.PROTO_CLOTH_GLOVES_CHAINMAIL_GLOVES, npc)))
+		#self._lower_weight_small(self._hide_loot(utils_item.item_create_in_inventory(const_proto_cloth.PROTO_CLOTH_HELMET_CHAIN, npc)))
+		self._lower_weight_small(self._hide_loot(utils_item.item_create_in_inventory(const_proto_armor.PROTO_ARMOR_CHAINMAIL, npc)))
+
+		dagger1 = self._hide_loot(utils_item.item_create_in_inventory(const_proto_weapon.PROTO_WEAPON_DAGGER_MASTERWORK, npc))
+		dagger2 = self._hide_loot(utils_item.item_create_in_inventory(const_proto_weapon.PROTO_WEAPON_DAGGER_MASTERWORK, npc))
+
+		utils_npc.npc_generate_hp_avg_first(npc, 1)
+		npc.item_wield_best_all()
+		npc.item_wield(dagger1, toee.item_wear_weapon_primary)
+		npc.item_wield(dagger2, toee.item_wear_weapon_secondary)
+		return
