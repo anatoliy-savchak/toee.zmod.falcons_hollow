@@ -484,3 +484,44 @@ class CtrlLGHumanCommoner(CtrlSkirmisherLG):
 		utils_npc.npc_generate_hp_avg_first(npc, 1)
 		npc.item_wield_best_all()
 		return
+
+class CtrlLGLargeEarthElemental(CtrlSkirmisherLG):
+	@classmethod
+	def get_proto_id(cls): return const_proto_npc.PROTO_NPC_ELEMENTAL_EARTH_LARGE_EMPTY
+
+	@classmethod
+	def get_price(cls): return 35
+
+	def after_created(self, npc):
+		assert isinstance(npc, toee.PyObjHandle)
+
+		utils_npc.npc_hitdice_set(npc, 8, 8, 0)
+		utils_npc.npc_abilities_set(npc, [25, 8, 19, 6, 11, 11])
+
+		#npc.obj_set_int(toee.obj_f_critter_portrait, 2500) #HAM_2500_b_rogue
+		npc.obj_set_int(toee.obj_f_critter_alignment, self.get_alignment_group())
+		npc.obj_set_int(toee.obj_f_critter_deity, toee.DEITY_HEIRONEOUS)
+		npc.obj_set_int(toee.obj_f_npc_ac_bonus, 10) # natural ac
+		npc.obj_set_int(toee.obj_f_npc_save_fortitude_bonus, 6)
+		npc.obj_set_int(toee.obj_f_npc_save_reflexes_bonus, 2)
+		npc.obj_set_int(toee.obj_f_npc_save_willpower_bonus, 2)
+
+		# atk +4/+4 => -3/-3 dmg 2d8+7=> 2d8+0
+		#npc.obj_set_idx_int(toee.obj_f_attack_types_idx, 0, 5) # Slam
+		#npc.obj_set_idx_int(toee.obj_f_attack_bonus_idx, 0, -3)
+		#npc.obj_set_idx_int(toee.obj_f_critter_attacks_idx, 0, 2)
+		#npc.obj_set_idx_int(toee.obj_f_critter_damage_idx, 0, toee.dice_new("2d8").packed)
+
+		npc.feat_add(toee.feat_cleave, 1)
+
+		npc.condition_add("Monster Subdual Immunity")
+		npc.condition_add("Monster Special Fade Out")
+		npc.condition_add("Monster Plant")
+		npc.condition_add_with_args("Monster DR Magic", 5)
+
+		self.setup_name(npc, "Large Earth Elemental")
+		#self._hide_loot(utils_item.item_create_in_inventory(const_proto_weapon.PROTO_WEAPON_GREATSWORD, npc))
+
+		utils_npc.npc_generate_hp_avg_first(npc, 0)
+		npc.item_wield_best_all()
+		return
