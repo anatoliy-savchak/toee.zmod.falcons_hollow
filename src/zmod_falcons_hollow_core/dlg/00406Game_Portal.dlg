@@ -3,7 +3,7 @@
 {3}{Begin adventuring Town Square.}{Begin adventuring Town Square.}{1}{}{0}{game.fade_and_teleport( 0, 0, 0, module_consts.MAP_ID_ZMOD_D_TOWN_SQUARE, module_consts.ZMOD_D_TOWN_SQUARE_ENTRY_COORDS_NORTH[0], module_consts.ZMOD_D_TOWN_SQUARE_ENTRY_COORDS_NORTH[1])}
 {4}{Begin adventuring Forest Path.}{Begin adventuring Forest Path.}{1}{}{0}{game.fade_and_teleport( 0, 0, 0, module_consts.MAP_ID_ZMOD_D_FOREST_PATH, module_consts.ZMOD_D_FOREST_PATH_ASHOP_COORDS_ENTRY[0], module_consts.ZMOD_D_FOREST_PATH_ASHOP_COORDS_ENTRY[1])}
 {5}{Begin adventuring Tomb.}{Begin adventuring Tomb.}{1}{}{0}{game.fade_and_teleport( 0, 0, 0, module_consts.MAP_ID_ZMOD_D_TOMB_MOUND, module_consts.ZMOD_D_TOMB_MOUND_COORDS_ENTRY[0], module_consts.ZMOD_D_TOMB_MOUND_COORDS_ENTRY[1])}
-{6}{Battlefield 1.}{Battlefield 1.}{1}{}{0}{game.fade_and_teleport( 0, 0, 0, module_consts.MAP_ID_ZMOD_BATTLEFIELD1, module_consts.ZMOD_BATTLEFIELD1_ENTRY1[0], module_consts.ZMOD_BATTLEFIELD1_ENTRY1[1])}
+{6}{Test}{Test}{1}{}{0}{do_test()}
 {11}{Return to shopmap.}{}{1}{}{0}{}
 
 {4000}{There's little to be gained by attacking the game portal.}{There's little to be gained by attacking the game portal.}{}{}{}{}

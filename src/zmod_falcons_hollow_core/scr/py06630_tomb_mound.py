@@ -49,7 +49,7 @@ class CtrlTombMound(ctrl_daemon2.CtrlDaemon2):
 		#self.place_encounter_m04()
 		#self.place_encounter_m05()
 		#self.place_encounter_m06()
-		self.place_encounter_m08()
+		self.place_encounter_m08B()
 		return
 
 	def delayed_mode(self):
@@ -309,6 +309,62 @@ class CtrlTombMound(ctrl_daemon2.CtrlDaemon2):
 		#self.display_encounter_m08()
 		print("activate_encounter_m08")
 		self.activate_monster("m08", "king")
+		return
+
+	def get_king_ctrl(self):
+		king_id = self.vars.get('king_id')
+		ctrl = ctrl_behaviour.get_ctrl(king_id)
+		return ctrl
+
+	def place_encounter_m08B(self):
+		PROMTER_SET = {
+			"loc": utils_obj.sec2loc(458, 478),
+			"title": "Sepulcher of the Prince",
+			"rot": const_toee.rotation_0800_oclock
+		}
+		npc = self.create_promter_at(PROMTER_SET["loc"], self.get_dialogid_default(), 180, 10 \
+			, py06122_cormyr_prompter.PROMTER_DIALOG_METHOD_DIALOG, PROMTER_SET["title"], PROMTER_SET["rot"] \
+		)
+		#self.vars["promter_id_accursed_entry"] = npc.id
+		#npc.scripts[const_toee.sn_bust] = DAEMON_SCRIPT_ID
+		if (not self.delayed_monsters()):
+			self.place_monsters_m08B()
+		return
+
+	def place_monsters_m08B(self):
+		king_npc, king_ctrl = self.create_npc_at(utils_obj.sec2loc(452, 478), py06631_tomb_encounters.CtrlKoboldKing, const_toee.rotation_0700_oclock, "m08", "king", factions_zmod.FACTION_ENEMY)
+		self.vars['king_id'] = king_npc.id
+		self.create_npc_at(utils_obj.sec2loc(454, 474), py06631_tomb_encounters.CtrlWight, const_toee.rotation_0500_oclock, "m08", "wight01", factions_zmod.FACTION_ENEMY)
+		self.create_npc_at(utils_obj.sec2loc(454, 476), py06631_tomb_encounters.CtrlWight, const_toee.rotation_0500_oclock, "m08", "wight02", factions_zmod.FACTION_ENEMY)
+		self.create_npc_at(utils_obj.sec2loc(454, 478), py06631_tomb_encounters.CtrlWight, const_toee.rotation_0500_oclock, "m08", "wight03", factions_zmod.FACTION_ENEMY)
+		self.create_npc_at(utils_obj.sec2loc(454, 480), py06631_tomb_encounters.CtrlWight, const_toee.rotation_0500_oclock, "m08", "wight04", factions_zmod.FACTION_ENEMY)
+		self.create_npc_at(utils_obj.sec2loc(454, 482), py06631_tomb_encounters.CtrlWight, const_toee.rotation_0500_oclock, "m08", "wight05", factions_zmod.FACTION_ENEMY)
+		self.create_npc_at(utils_obj.sec2loc(466, 483), py06631_tomb_encounters.CtrlWraith, const_toee.rotation_1100_oclock, "m08", "wraith", factions_zmod.FACTION_ENEMY)
+		return
+
+	def display_encounter_m08B(self):
+		print("display_encounter_m08")
+		if (self.delayed_monsters()):
+			self.place_monsters_m08B()
+		self.reveal_monster("m08", "king")
+		self.reveal_monster("m08", "wight01")
+		self.reveal_monster("m08", "wight02")
+		self.reveal_monster("m08", "wight03")
+		self.reveal_monster("m08", "wight04")
+		self.reveal_monster("m08", "wight05")
+		self.reveal_monster("m08", "wraith")
+		return
+
+	def activate_encounter_m08B(self):
+		#self.display_encounter_m08()
+		print("activate_encounter_m08")
+		self.activate_monster("m08", "king")
+		self.activate_monster("m08", "wight01")
+		self.activate_monster("m08", "wight02")
+		self.activate_monster("m08", "wight03")
+		self.activate_monster("m08", "wight04")
+		self.activate_monster("m08", "wight05")
+		self.activate_monster("m08", "wraith")
 		return
 
 	def get_king_ctrl(self):

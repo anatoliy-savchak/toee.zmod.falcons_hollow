@@ -17,6 +17,7 @@ def san_start_combat(attachee, triggerer):
 	assert isinstance(attachee, toee.PyObjHandle)
 	assert isinstance(triggerer, toee.PyObjHandle)
 	ctrl = CtrlBehaviour.get_from_obj(attachee)
+	print("san_start_combat {}, {}".format(attachee, ctrl))
 	if (ctrl):
 		return ctrl.start_combat(attachee, triggerer)
 	return toee.RUN_DEFAULT
@@ -115,7 +116,7 @@ class CtrlBehaviour(object):
 		return
 
 	@classmethod
-	def create_obj_and_class(cls, loc, call_created=1):
+	def create_obj_and_class(cls, loc, call_created=1, register=1):
 		protoid = cls.get_proto_id()
 		if (protoid <= 0):
 			debug.breakp("protoId cannot be zero!")
@@ -126,10 +127,11 @@ class CtrlBehaviour(object):
 			raise Exception("Failed to create obj by proto: {}!".format(protoid))
 		print("obj_create({}, {}) = {}".format(protoid, loc, npc))
 		ctrl = cls()
-		o = utils_storage.obj_storage(npc)
-		o.data[cls.get_name()] = ctrl
-		o.alias = cls.get_alias()
-		o.origin = npc.origin
+		if (register):
+			o = utils_storage.obj_storage(npc)
+			o.data[cls.get_name()] = ctrl
+			o.alias = cls.get_alias()
+			o.origin = npc.origin
 		if (call_created):
 			ctrl.created(npc)
 		return npc, ctrl

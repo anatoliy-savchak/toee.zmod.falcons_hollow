@@ -93,6 +93,12 @@ class CtrlKoboldKing(ctrl_behaviour.CtrlBehaviourAI):
 		npc.scripts[const_toee.sn_start_combat] = THIS_SCRIPT_ID
 
 		utils_item.item_create_in_inventory(const_proto_cloth.PROTO_CLOAK_RED, npc)
+
+		#npc.condition_add_with_args('Caster_Level_Mod', 15, 0, toee.spell_tashas_hideous_laughter)
+		npc.feat_add(toee.feat_point_blank_shot)
+		npc.feat_add(toee.feat_precise_shot)
+
+
 		npc.item_wield_best_all()
 		utils_npc.npc_generate_hp(npc)
 
@@ -106,10 +112,13 @@ class CtrlKoboldKing(ctrl_behaviour.CtrlBehaviourAI):
 		stat_class = toee.domain_special
 		caster_level = npc.highest_arcane_caster_level
 		# 2
-		self.spells.add_spell(toee.spell_bulls_strength, stat_class, caster_level)
+		#self.spells.add_spell(toee.spell_bulls_strength, stat_class, caster_level)
+		#self.spells.add_spell(toee.spell_tashas_hideous_laughter, stat_class, caster_level)
+		self.spells.add_spell(toee.spell_scorching_ray, stat_class, caster_level, 4)
+		self.spells.add_spell(toee.spell_mirror_image, stat_class, caster_level)
 		# 1
 		self.spells.add_spell(toee.spell_mage_armor, stat_class, caster_level)
-		self.spells.add_spell(toee.spell_magic_missile, stat_class, caster_level)
+		self.spells.add_spell(toee.spell_magic_missile, stat_class, caster_level, 6)
 		self.spells.add_spell(toee.spell_sleep, stat_class, caster_level)
 
 		# 0
@@ -133,11 +142,16 @@ class CtrlKoboldKing(ctrl_behaviour.CtrlBehaviourAI):
 
 		tac = utils_tactics.TacticsHelper(self.get_name())
 		
-		target = self.tactics_determine_target(npc, 1)
+		target = npc.obj_get_obj(toee.obj_f_npc_who_hit_me_last)
+		if (target and not utils_npc.npc_could_be_attacked(target)): target = None
+		if (not target):
+			target = self.tactics_determine_target(npc, 1)
 		npc.obj_set_obj(toee.obj_f_npc_combat_focus, target)
 
 		print("target: {}".format(target))
 		while (target):
+			if (not utils_npc_spells_tactics.STScorchingRay(npc, self.spells, tac, target).execute()):
+				break
 			if (not utils_npc_spells_tactics.STMagicMissle(npc, self.spells, tac, target).execute()):
 				break
 			tac.add_target_obj(target.id)
@@ -163,4 +177,10 @@ class CtrlKoboldKing(ctrl_behaviour.CtrlBehaviourAI):
 		npc = self.npc_get()
 		assert isinstance(npc, toee.PyObjHandle)
 		npc.cast_spell(toee.spell_bulls_strength, npc)
+		return
+
+	def do_spell_mirror_image(self):
+		npc = self.npc_get()
+		assert isinstance(npc, toee.PyObjHandle)
+		npc.cast_spell(toee.spell_mirror_image, npc)
 		return

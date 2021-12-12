@@ -90,10 +90,11 @@ def npc_generate_hp_avg_first(npc):
 	con_mod = npc.stat_level_get(toee.stat_con_mod)
 	if (con_mod < 0): con_mod = 0
 
+	# con bonus applied in GlobalMaxHPCalc
 	pts = 0
 	lines = []
 	if (hd.size or hd.bonus):
-		dstr = "{}d{}+{}".format(hd.number, hd.size, con_mod * hd.number)
+		dstr = "{}d{}".format(hd.number, hd.size)
 		dice = toee.dice_new(dstr)
 		hp = dice.roll()
 		lines.append("{} = {}".format(dstr, hp))
@@ -103,14 +104,18 @@ def npc_generate_hp_avg_first(npc):
 	for c in npc.char_classes:
 		i += 1
 		d = char_class_get_hit_dice(c)
-		hp = toee.dice_new("1d{} + {}".format(d, con_mod)).roll()
+		dstr = "d{}/2".format(d) if (i != 1) else "d{}".format(d)
+		hp = d // 2 if (i != 1) else d
+		if (i % 2 == 0): 
+			hp += 1
+			dstr += " + 1"
 		pts += hp
-		s = "{} {}: 1d{} + {} = {}".format(i, toee.game.get_mesline('mes\\stat.mes', c), d, con_mod, hp)
+		s = "{}: {}: {}={}".format(i, toee.game.get_mesline('mes\\stat.mes', c), dstr, hp)
 		lines.append(s)
 	
-	print("Random HP {}={} for {}".format(pts, lines, npc))
 	npc.obj_set_int(toee.obj_f_hp_pts, pts)
 	hp = npc.stat_level_get(toee.stat_hp_current)
+	print("AVG HP {} (w/o con: {})={} for {}".format(hp, pts, lines, npc))
 
 	return (hp, lines)
 

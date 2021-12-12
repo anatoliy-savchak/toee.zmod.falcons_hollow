@@ -132,4 +132,23 @@ class STShieldOfFaith(SpellTactic):
 class STMagicMissle(SpellTactic):
 	@staticmethod
 	def _get_spell_num(): return toee.spell_magic_missile
+
 	def _is_personal(self): return 0 # bug currently 2021-11-27
+
+class STTashasHideousLaughter(SpellTactic):
+	@staticmethod
+	def _get_spell_num(): return toee.spell_tashas_hideous_laughter
+
+	def _is_personal(self): return 0 # check
+
+	def _except_q(self): return self.npc.d20_query_has_spell_condition(toee.spell_tashas_hideous_laughter)
+
+class STMirrorImage(SpellTactic):
+	@staticmethod
+	def _get_spell_num(): return toee.spell_mirror_image
+
+class STScorchingRay(SpellTactic):
+	@staticmethod
+	def _get_spell_num(): return toee.spell_scorching_ray
+
+	def _is_personal(self): return 0 # check

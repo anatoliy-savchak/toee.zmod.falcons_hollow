@@ -1,4 +1,5 @@
 import toee, utils_storage, startup_zmod, utils_obj, const_proto_containers, debug, utils_pc, module_consts
+import py07710_skirmish_harbinger_monsters
 
 def san_dialog(attachee, triggerer):
 	triggerer.begin_dialog( attachee, 1 )
@@ -54,4 +55,25 @@ def place_chests():
 		pc.money_adj(-currentcp)
 		utils_pc.pc_party_set_starting_gold_as_raw(0)
 
+	return
+
+# import py00406Game_Portal
+# py00406Game_Portal.do_test()
+def do_test():
+	party = toee.game.party
+	first = party[0]
+	for i in reversed(xrange(1, len(party))):
+		print(i)
+		o = party[i]
+		first.obj_remove_from_all_groups(o)
+		o.destroy()
+	toee.game.update_party_ui()
+
+	if (1):
+		npc, ctrl = py07710_skirmish_harbinger_monsters.CtrlLGClericOfYondallaAsPC.create_obj_and_class(utils_obj.sec2loc(478, 480), 1, 0)
+		added = first.pc_add(npc)
+		print("added: {}".format(added))
+		npc.obj_remove_from_all_groups(first)
+		first.destroy()
+		toee.game.update_party_ui()
 	return

@@ -19,3 +19,10 @@
 {83}{Continue.}{}{1}{}{84}{}
 {84}{Amazingly, the sarcophagus itself remains closed and undisturbed.}{Amazingly, the sarcophagus itself remains closed and undisturbed.}{}{}{}{cs().get_king_ctrl().do_spell_bull_strength()}
 {89}{Close.}{}{1}{}{0}{cs().activate_encounter_m08()}
+
+{180}{Within this solemn chamber lies a single raised dais where a grand sarcophagus of carved coral rests.}{Within this solemn chamber lies a single raised dais where a grand sarcophagus of carved coral rests.}{}{}{}{cs().display_encounter_m08B()}
+{181}{Continue.}{}{1}{}{182}{}
+{182}{Around the chamber, the crumbling walls are covered with murals that are now little more than smeared paint and powder.}{Around the chamber, the crumbling walls are covered with murals that are now little more than smeared paint and powder.}{}{}{}{cs().get_king_ctrl().do_spell_mage_armor()}
+{183}{Continue.}{}{1}{}{184}{}
+{184}{Amazingly, the sarcophagus itself remains closed and undisturbed.}{Amazingly, the sarcophagus itself remains closed and undisturbed.}{}{}{}{cs().get_king_ctrl().do_spell_mirror_image()}
+{189}{Close.}{}{1}{}{0}{cs().activate_encounter_m08B()}
