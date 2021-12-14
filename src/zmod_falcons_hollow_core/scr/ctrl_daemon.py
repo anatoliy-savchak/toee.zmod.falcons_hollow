@@ -157,12 +157,13 @@ class CtrlDaemon(object):
 		return
 
 
-	def create_npc_at(self, npc_loc, ctrl_class, rot, encounter, code_name, faction = None, no_draw = 1, no_kos = 1):
+	def create_npc_at(self, npc_loc, ctrl_class, rot, encounter, code_name, faction = None, no_draw = 1, no_kos = 1, no_move = 0):
 		npc, ctrl = ctrl_class.create_obj_and_class(npc_loc)
 		x, y = utils_obj.loc2sec(npc.location)
 		print("create_npc_at npc: {}, ctrl: {}, id: {}, coord: {},{}".format(npc, ctrl, npc.id, x, y))
 		if (npc):
-			npc.move(npc_loc)
+			if (not no_move):
+				npc.move(npc_loc)
 			npc.rotation = rot
 			ctrl.vars["initial_position"] = utils_obj.loc2sec(npc.location)
 			ctrl.vars["initial_rotation"] = npc.rotation

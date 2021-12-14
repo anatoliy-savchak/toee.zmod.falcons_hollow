@@ -162,7 +162,7 @@ class CtrlBehaviour(object):
 	@classmethod
 	def get_from_obj(cls, npc):
 		data = utils_storage.obj_storage(npc).data
-		if (["ctrl"] in data):
+		if (data["ctrl"] in data):
 			ctrl = data["ctrl"]
 			assert isinstance(ctrl, CtrlBehaviour)
 			return ctrl

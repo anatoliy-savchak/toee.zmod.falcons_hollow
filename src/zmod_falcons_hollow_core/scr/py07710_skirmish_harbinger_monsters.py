@@ -15,6 +15,22 @@ def san_wield_off(attachee, triggerer): return ctrl_behaviour.san_wield_off(atta
 
 def get_character_classes():
 	result = [\
+		CtrlLGClericOfOrderAsPC\
+		, CtrlLGClericOfYondallaAsPC\
+		, CtrlLGDwarfAxefighter\
+		, CtrlLGEmberHumanMonk
+		, CtrlLGEvokersApprentice
+		, CtrlLGHalflingVeteran
+		, CtrlLGHoundArchon
+		, CtrlLGHumanCommoner
+		, CtrlLGLargeEarthElemental
+		, CtrlLGManAtArms
+		, CtrlLGSwordofHeironeousAsPC
+	]
+	return result
+
+def get_enemy_classes():
+	result = [\
 		CtrlLGClericOfOrder\
 		, CtrlLGClericOfYondalla\
 		, CtrlLGDwarfAxefighter\

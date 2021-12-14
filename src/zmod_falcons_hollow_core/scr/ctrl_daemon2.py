@@ -196,8 +196,8 @@ class CtrlDaemon2(ctrl_daemon.CtrlDaemon):
 	def heartbeat(self, npc):
 		return
 
-	def create_npc_at(self, npc_loc, ctrl_class, rot, encounter, code_name, faction = None, no_draw = 1, no_kos = 1):
-		npc, ctrl = super(CtrlDaemon2, self).create_npc_at(npc_loc, ctrl_class, rot, encounter, code_name, faction, no_draw, no_kos)
+	def create_npc_at(self, npc_loc, ctrl_class, rot, encounter, code_name, faction = None, no_draw = 1, no_kos = 1, no_move = 0):
+		npc, ctrl = super(CtrlDaemon2, self).create_npc_at(npc_loc, ctrl_class, rot, encounter, code_name, faction, no_draw, no_kos, no_move)
 		if (ctrl):
 			ctrl.vars["daemon_name"] = self.get_name()
 		return npc, ctrl

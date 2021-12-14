@@ -266,7 +266,7 @@ def menu_show_info_click():
 		for pc in toee.game.party:
 			ctrl = critter_is_compatible_with_skirmishing(pc)
 			if not ctrl: continue
-			line = "{}, {}. Cost: {}".format(i, ctrl.get_title(), utils_npc.get_alignment_short(ctrl.get_alignment_group()), ctrl.get_price())
+			line = "{}, {}. Cost: {}".format(ctrl.get_title(), utils_npc.get_alignment_short(ctrl.get_alignment_group()), ctrl.get_price())
 			creatures.append((line, ctrl.get_price()))
 
 		if (creatures):
@@ -277,3 +277,52 @@ def menu_show_info_click():
 	result = "\n".join(lines)
 	toee.game.alert_show(result, "Close")
 	return
+
+def menu_map_start_click(map_id):
+	assert isinstance(map_id, int)
+	toee.game.fade_and_teleport(0, 0, 0, map_id, 495, 506)
+	return
+
+def generate_enemies1(points, alignment_group):
+	assert isinstance(points, int)
+	assert isinstance(alignment_group, int)
+
+	left = points
+	result = []
+	available_commanders = []
+	available_critters = [] #(class, cost)
+	if (1):
+		for c in py07710_skirmish_harbinger_monsters.get_enemy_classes():
+			assert isinstance(c, py07710_skirmish_harbinger_monsters.CtrlSkirmisher)
+			if c.get_alignment_group() != alignment_group: continue
+			commander_level = c.get_commander_level()
+			if (commander_level > 0): 
+				available_commanders.append((c, c.get_price()))
+			else:
+				available_critters.append((c, c.get_price()))
+	
+	if (not available_commanders): return result
+
+	available_critters.sort(reverse = False, key = lambda kv: kv[1])
+
+	primary_commander_class_t = available_commanders[toee.game.random_range(0, len(available_commanders)-1)]
+	primary_commander_class = primary_commander_class_t[0]
+	available_commanders.remove(primary_commander_class_t)
+	left -= primary_commander_class_t[1]
+	result.append(primary_commander_class)
+
+	lowest_cost = available_critters[0][1]
+
+	max_loop = 1000
+	i = -1
+	while (left > lowest_cost):
+		i += 1
+		if (i > max_loop): break
+		if (left == lowest_cost):
+			critter_class_t = available_critters[0]
+		else:
+			critter_class_t = available_critters[toee.game.random_range(0, len(available_critters)-1)]
+			if (left - critter_class_t[1] < 0): continue
+		left -= critter_class_t[1]
+		result.append(critter_class_t[0])
+	return result

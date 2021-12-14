@@ -53,6 +53,11 @@ def SkirmisherStart_OnBuildRadialMenuEntry(attachee, args, evt_obj):
 				item = tpdp.RadialMenuEntryPythonAction(title, toee.D20A_PYTHON_ACTION, PA_SKIRMISHER, tag, "TAG_INTERFACE_HELP")
 				item_id = item.add_as_child(attachee, creatures_id)
 
+		# info
+		if (1):
+			game_start = tpdp.RadialMenuEntryPythonAction("START", toee.D20A_PYTHON_ACTION, PA_SKIRMISHER, 5050, "TAG_INTERFACE_HELP")
+			game_start_id = game_start.add_as_child(attachee, root_id)
+
 	except Exception, e:
 		print "SkirmisherStart_OnBuildRadialMenuEntry:"
 		print '-'*60
@@ -78,6 +83,10 @@ def SkirmisherStart_OnD20PythonActionPerform(attachee, args, evt_obj):
 		print("tag: {}".format(tag))
 		if (tag == 1):
 			error_msg = utils_skirmish.menu_show_info_click()
+			if (error_msg):
+				do_error_message(error_msg)
+		elif (tag >= 5000 and tag < 6000):
+			error_msg = utils_skirmish.menu_map_start_click(tag)
 			if (error_msg):
 				do_error_message(error_msg)
 		elif (tag >= 1100 and tag < 2000):
