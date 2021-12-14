@@ -1,4 +1,4 @@
-import toee, debugg, tpdp, ctrl_behaviour
+import toee, debugg, tpdp, ctrl_behaviour, utils_npc
 
 debug_print = 1
 class StatInspect:
@@ -23,7 +23,7 @@ class StatInspect:
 		self.stats["class_name_dict"] = self.get_class_name_level_dict()
 		self.stats["level"] = self.get_level()
 		# Alignment
-		self.stats["alignment_short"] = self.get_alignment_short()
+		self.stats["alignment_short"] = utils_npc.npc_get_alignment_short(self.npc)
 		# Size and Type
 		self.stats["size_name"] = self.get_size_name()
 		self.stats["type_name"] = self.get_type_name()
@@ -109,23 +109,6 @@ class StatInspect:
 		level_cr = self.npc.stat_level_get(toee.stat_level)
 		result = cr + level_cr
 		return result
-
-	def get_alignment_short(self):
-		a = self.npc.obj_get_int(toee.obj_f_critter_alignment)
-		if (a == toee.ALIGNMENT_NEUTRAL): return "N"
-		if (a == toee.ALIGNMENT_LAWFUL): return "L"
-		if (a == toee.ALIGNMENT_LAWFUL_NEUTRAL): return "LN"
-		if (a == toee.ALIGNMENT_CHAOTIC): return "C"
-		if (a == toee.ALIGNMENT_CHAOTIC_NEUTRAL): return "CN"
-		if (a == toee.ALIGNMENT_GOOD): return "G"
-		if (a == toee.ALIGNMENT_NEUTRAL_GOOD): return "NG"
-		if (a == toee.ALIGNMENT_LAWFUL_GOOD): return "LG"
-		if (a == toee.ALIGNMENT_CHAOTIC_GOOD): return "CG"
-		if (a == toee.ALIGNMENT_EVIL): return "E"
-		if (a == toee.ALIGNMENT_NEUTRAL_EVIL): return "NE"
-		if (a == toee.ALIGNMENT_LAWFUL_EVIL): return "LE"
-		if (a == toee.ALIGNMENT_CHAOTIC_EVIL ): return "CE"
-		return None
 
 	def get_race_name(self):
 		race = self.npc.stat_level_get(toee.stat_race)

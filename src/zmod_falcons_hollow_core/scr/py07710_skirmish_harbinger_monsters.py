@@ -13,6 +13,23 @@ def san_dialog(attachee, triggerer): return ctrl_behaviour.san_dialog(attachee, 
 def san_heartbeat(attachee, triggerer): return ctrl_behaviour.san_heartbeat(attachee, triggerer)
 def san_wield_off(attachee, triggerer): return ctrl_behaviour.san_wield_off(attachee, triggerer)
 
+def get_character_classes():
+	result = [\
+		CtrlLGClericOfOrder\
+		, CtrlLGClericOfYondalla\
+		, CtrlLGDwarfAxefighter\
+		, CtrlLGEmberHumanMonk
+		, CtrlLGEvokersApprentice
+		, CtrlLGHalflingVeteran
+		, CtrlLGHoundArchon
+		, CtrlLGHumanCommoner
+		, CtrlLGLargeEarthElemental
+		, CtrlLGManAtArms
+		, CtrlLGSwordofHeironeous
+	]
+	return result
+
+
 class CtrlSkirmisher(ctrl_behaviour.CtrlBehaviour):
 	@classmethod
 	def get_commander_level(cls): return 0
@@ -96,7 +113,7 @@ class CtrlLGClericOfOrder(CtrlSkirmisherLG):
 		npc.obj_set_int(toee.obj_f_critter_alignment, self.get_alignment_group())
 		npc.obj_set_int(toee.obj_f_critter_deity, toee.DEITY_HEIRONEOUS)
 		npc.obj_set_int(toee.obj_f_critter_domain_1, toee.good)
-		npc.obj_set_int(toee.obj_f_critter_domain_1, toee.law)
+		npc.obj_set_int(toee.obj_f_critter_domain_2, toee.law)
 
 		self.setup_name(npc, self.get_title())
 
@@ -168,7 +185,7 @@ class CtrlLGClericOfYondalla(CtrlSkirmisherLG):
 		npc.obj_set_int(toee.obj_f_critter_alignment, self.get_alignment_group())
 		npc.obj_set_int(toee.obj_f_critter_deity, toee.DEITY_YONDALLA)
 		npc.obj_set_int(toee.obj_f_critter_domain_1, toee.good)
-		npc.obj_set_int(toee.obj_f_critter_domain_1, toee.protection)
+		npc.obj_set_int(toee.obj_f_critter_domain_2, toee.protection)
 
 		npc.feat_add(toee.feat_martial_weapon_proficiency_short_sword, 1)
 
@@ -556,7 +573,6 @@ class CtrlLGLargeEarthElemental(CtrlSkirmisherLG):
 		npc.item_wield_best_all()
 		return
 
-
 class CtrlLGManAtArms(CtrlSkirmisherLG):
 	@classmethod
 	def get_proto_id(cls): return const_proto_npc.PROTO_NPC_MAN
@@ -636,7 +652,7 @@ class CtrlLGSwordofHeironeous(CtrlSkirmisherLG):
 		npc.obj_set_int(toee.obj_f_critter_alignment, self.get_alignment_group())
 		npc.obj_set_int(toee.obj_f_critter_deity, toee.DEITY_HEIRONEOUS)
 		npc.obj_set_int(toee.obj_f_critter_domain_1, toee.good)
-		npc.obj_set_int(toee.obj_f_critter_domain_1, toee.protection)
+		npc.obj_set_int(toee.obj_f_critter_domain_2, toee.protection)
 
 		self.setup_name(npc, self.get_title())
 

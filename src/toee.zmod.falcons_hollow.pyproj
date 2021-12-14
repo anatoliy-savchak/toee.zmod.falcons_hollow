@@ -83,6 +83,7 @@
     <Compile Include="zmod_falcons_hollow_core\rules\d20_actions\action03018_open_door.py" />
     <Compile Include="zmod_falcons_hollow_core\rules\d20_actions\action03019_ball_of_fire.py" />
     <Compile Include="zmod_falcons_hollow_core\rules\d20_actions\action03020_activate_item_swift.py" />
+    <Compile Include="zmod_falcons_hollow_core\rules\d20_actions\action03022_skirmisher.py" />
     <Compile Include="zmod_falcons_hollow_core\rules\d20_actions\action03021_forge.py" />
     <Compile Include="zmod_falcons_hollow_core\rules\d20_actions\action03020_stench.py" />
     <Compile Include="zmod_falcons_hollow_core\scr.builtin\char_editor.py" />
@@ -203,6 +204,7 @@
     <Compile Include="zmod_falcons_hollow_core\scr\tpModifiers\ability_check_modifier_attacker.py" />
     <Compile Include="zmod_falcons_hollow_core\scr\tpModifiers\bonus_ac.py" />
     <Compile Include="zmod_falcons_hollow_core\scr\tpModifiers\debug_info.py" />
+    <Compile Include="zmod_falcons_hollow_core\scr\tpModifiers\skirmisher.py" />
     <Compile Include="zmod_falcons_hollow_core\scr\tpModifiers\monster_incorporeal2.py" />
     <Compile Include="zmod_falcons_hollow_core\scr\tpModifiers\rest_full.py" />
     <Compile Include="zmod_falcons_hollow_core\scr\tpModifiers\forge_weapon.py" />
@@ -308,6 +310,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="zmod_falcons_hollow_core\scr\utils_pc.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="zmod_falcons_hollow_core\scr\utils_skirmish.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="zmod_falcons_hollow_core\scr\utils_sneak.py" />

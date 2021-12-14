@@ -967,3 +967,22 @@ def critters_vicinity(npc, include_self = 0):
 
 def npc_anim_goal_push_walk_to_tile(npc, loc):
 	return npc.anim_goal_push_walk_to_tile(loc.loc_xy.x, loc.loc_xy.y, loc.off_x, loc.off_y)
+
+def npc_get_alignment_short(npc):
+	return get_alignment_short(npc.obj_get_int(toee.obj_f_critter_alignment))
+
+def get_alignment_short(a):
+	if (a == toee.ALIGNMENT_NEUTRAL): return "N"
+	if (a == toee.ALIGNMENT_LAWFUL): return "L"
+	if (a == toee.ALIGNMENT_LAWFUL_NEUTRAL): return "LN"
+	if (a == toee.ALIGNMENT_CHAOTIC): return "C"
+	if (a == toee.ALIGNMENT_CHAOTIC_NEUTRAL): return "CN"
+	if (a == toee.ALIGNMENT_GOOD): return "G"
+	if (a == toee.ALIGNMENT_NEUTRAL_GOOD): return "NG"
+	if (a == toee.ALIGNMENT_LAWFUL_GOOD): return "LG"
+	if (a == toee.ALIGNMENT_CHAOTIC_GOOD): return "CG"
+	if (a == toee.ALIGNMENT_EVIL): return "E"
+	if (a == toee.ALIGNMENT_NEUTRAL_EVIL): return "NE"
+	if (a == toee.ALIGNMENT_LAWFUL_EVIL): return "LE"
+	if (a == toee.ALIGNMENT_CHAOTIC_EVIL ): return "CE"
+	return None
