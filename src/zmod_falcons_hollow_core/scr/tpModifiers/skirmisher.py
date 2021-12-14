@@ -20,17 +20,38 @@ def SkirmisherStart_OnBuildRadialMenuEntry(attachee, args, evt_obj):
 		party = tpdp.RadialMenuEntryParent("Warband")
 		party_id = party.add_as_child(attachee, root_id)
 
-		commander = tpdp.RadialMenuEntryParent("Commanders")
-		commander_id = commander.add_as_child(attachee, party_id)
+		# info
+		if (1):
+			skirmish_settings = utils_skirmish.skirmish_settings_get()
+			info_title = "Info ({}, {}/{})...".format(utils_npc.get_alignment_short(skirmish_settings.faction_alignment), skirmish_settings.points_left, skirmish_settings.points_max)
+			info = tpdp.RadialMenuEntryPythonAction(info_title, toee.D20A_PYTHON_ACTION, PA_SKIRMISHER, 1, "TAG_INTERFACE_HELP")
+			info_id = info.add_as_child(attachee, root_id)
 
-		commander_menu_dict = utils_skirmish.menu_get_commander_dict()
-		for kv in sorted(commander_menu_dict.items(), reverse = False, key = lambda kv: kv[0]):
-			title = kv[0]
-			print(title)
-			value = kv[1] #commander_menu_dict[title]
-			tag = 1100 + value[1]
-			item = tpdp.RadialMenuEntryPythonAction(title, toee.D20A_PYTHON_ACTION, PA_SKIRMISHER, tag, "TAG_INTERFACE_HELP")
-			item_id = item.add_as_child(attachee, commander_id)
+		commanders = tpdp.RadialMenuEntryParent("Commanders")
+		if (commanders):
+			commanders_id = commanders.add_as_child(attachee, party_id)
+
+			commander_menu_dict = utils_skirmish.menu_get_commander_dict()
+			for kv in sorted(commander_menu_dict.items(), reverse = False, key = lambda kv: kv[0]):
+				title = kv[0]
+				print(title)
+				value = kv[1]
+				tag = 1100 + value[1]
+				item = tpdp.RadialMenuEntryPythonAction(title, toee.D20A_PYTHON_ACTION, PA_SKIRMISHER, tag, "TAG_INTERFACE_HELP")
+				item_id = item.add_as_child(attachee, commanders_id)
+
+		creatures = tpdp.RadialMenuEntryParent("Creatures")
+		if (creatures):
+			creatures_id = creatures.add_as_child(attachee, party_id)
+
+			creatures_dict = utils_skirmish.menu_get_compatible_creatures_dict()
+			for kv in creatures_dict.items():
+				title = kv[0]
+				print(title)
+				value = kv[1]
+				tag = 2100 + value[1]
+				item = tpdp.RadialMenuEntryPythonAction(title, toee.D20A_PYTHON_ACTION, PA_SKIRMISHER, tag, "TAG_INTERFACE_HELP")
+				item_id = item.add_as_child(attachee, creatures_id)
 
 	except Exception, e:
 		print "SkirmisherStart_OnBuildRadialMenuEntry:"
@@ -55,8 +76,16 @@ def SkirmisherStart_OnD20PythonActionPerform(attachee, args, evt_obj):
 
 		tag = evt_obj.d20a.data1
 		print("tag: {}".format(tag))
-		if (tag >= 1100 and tag < 2000):
+		if (tag == 1):
+			error_msg = utils_skirmish.menu_show_info_click()
+			if (error_msg):
+				do_error_message(error_msg)
+		elif (tag >= 1100 and tag < 2000):
 			error_msg = utils_skirmish.menu_commander_place_click(tag - 1100)
+			if (error_msg):
+				do_error_message(error_msg)
+		elif (tag >= 2100 and tag < 3000):
+			error_msg = utils_skirmish.menu_creature_place_click(tag - 2100)
 			if (error_msg):
 				do_error_message(error_msg)
 		else:

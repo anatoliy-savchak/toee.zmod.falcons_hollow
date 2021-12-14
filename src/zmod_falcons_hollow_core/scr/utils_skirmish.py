@@ -1,4 +1,4 @@
-import toee, utils_npc, utils_obj, ctrl_behaviour, const_toee
+import toee, utils_npc, utils_obj, ctrl_behaviour, const_toee, utils_storage
 import py07710_skirmish_harbinger_monsters
 
 def menu_get_commander_dict():
@@ -15,6 +15,47 @@ def menu_get_commander_dict():
 			result[menu_get_commander_title(c)] = (c, i)
 	return result
 
+def menu_get_compatible_creatures_dict():
+	result = {}
+	all = []
+	if (1):
+		i = -1
+		for c in py07710_skirmish_harbinger_monsters.get_character_classes():
+			assert isinstance(c, py07710_skirmish_harbinger_monsters.CtrlSkirmisher)
+			i += 1
+			commander_level = c.get_commander_level()
+			if (commander_level > 0): continue
+
+			all.append((c, i))
+
+	if (all):
+		commanders = []
+		for pc in toee.game.party:
+			ctrl = critter_is_commander(pc)
+			if not ctrl: continue
+			commanders.append((pc, ctrl))
+
+		if commanders:
+			for t in all:
+				compatible = 0
+				c = t[0]
+				for ct in commanders:
+					if critter_ctrl_is_compatible_with_commander(c, ct[1]):
+						compatible = 1
+						break
+				if (compatible):
+					result[menu_get_creature_title(c)] = t
+	return result
+
+def menu_get_creature_title(c):
+	assert isinstance(c, py07710_skirmish_harbinger_monsters.CtrlSkirmisher)
+	alignment = c.get_alignment_group()
+	al_str = utils_npc.get_alignment_short(alignment)
+	title = c.get_title()
+	price = c.get_price()
+	text = "{} {}. Cost: {}".format(al_str, title, price)
+	return text
+
 def menu_get_commander_title(c):
 	assert isinstance(c, py07710_skirmish_harbinger_monsters.CtrlSkirmisher)
 	commander_level = c.get_commander_level()
@@ -28,10 +69,14 @@ def menu_get_commander_title(c):
 def menu_commander_place_click(class_id):
 	assert isinstance(class_id, int)
 	# create commander
-	# remove incompatible, for now everyone
+	# remove incompatible
 
 	c = py07710_skirmish_harbinger_monsters.get_character_classes()[class_id]
 	assert isinstance(c, py07710_skirmish_harbinger_monsters.CtrlSkirmisher)
+
+	skirmish_settings = skirmish_settings_get()
+	if (skirmish_settings.points_left < c.get_price()):
+		return "Insufficient points {} left to buy this commander, cost: {}".format(skirmish_settings.points_left, c.get_price())
 
 	# check if same commander already exists
 	for pc in toee.game.party:
@@ -46,6 +91,45 @@ def menu_commander_place_click(class_id):
 	added = toee.game.leader.pc_add(npc)
 
 	warband_clear_incompatible(npc, ctrl)
+
+	if (get_commander_count() == 1):
+		skirmish_settings.faction_alignment = ctrl.get_alignment_group()
+	return None # no error
+
+def menu_creature_place_click(class_id):
+	assert isinstance(class_id, int)
+	# create creature
+
+	c = py07710_skirmish_harbinger_monsters.get_character_classes()[class_id]
+	assert isinstance(c, py07710_skirmish_harbinger_monsters.CtrlSkirmisher)
+
+	skirmish_settings = skirmish_settings_get()
+	if (skirmish_settings.points_left < c.get_price()):
+		return "Insufficient points {} left to buy this creature, cost: {}".format(skirmish_settings.points_left, c.get_price())
+
+	# check if compatible
+	if (1):
+		commanders = []
+		for pc in toee.game.party:
+			ctrl = critter_is_commander(pc)
+			if not ctrl: continue
+			commanders.append((pc, ctrl))
+
+		if commanders:
+			compatible = False
+			for ct in commanders:
+				if critter_ctrl_is_compatible_with_commander(c, ct[1]):
+					compatible = True
+					break
+			if not compatible:
+				return "{} is incompatible with any Commanders!".format(ctrl.get_title())
+
+	npc, ctrl = c.create_obj_and_class(utils_obj.sec2loc(478, 480), 1, 1)
+	npc.condition_add("SkirmisherStart")
+	npc.rotation = const_toee.rotation_0600_oclock
+	added = toee.game.leader.pc_add(npc)
+
+	warband_recalc_points()
 	return None # no error
 
 def critter_is_compatible_with_skirmishing(critter): # -> ctrl
@@ -53,7 +137,7 @@ def critter_is_compatible_with_skirmishing(critter): # -> ctrl
 	critter_ctrl = ctrl_behaviour.get_ctrl(critter.id)
 
 	if (critter_ctrl is None): 
-		print("critter_ctrl is None for {}".format(critter))
+		print("critter_ctrl is None for {}, id: {}".format(critter, critter.id))
 		return None
 	if not issubclass(critter_ctrl.__class__, py07710_skirmish_harbinger_monsters.CtrlSkirmisher): 
 		print("not issubclass(critter_ctrl.__class__(), py07710_skirmish_harbinger_monsters.CtrlSkirmisher) {} for {}".format(critter_ctrl, critter))
@@ -70,6 +154,12 @@ def critter_is_compatible_with_commander(critter, commander, commander_ctrl):
 
 	critter_ctrl = critter_is_compatible_with_skirmishing(critter)
 	if (critter_ctrl is None): return False
+
+	return critter_ctrl_is_compatible_with_commander(critter_ctrl, commander_ctrl)
+
+def critter_ctrl_is_compatible_with_commander(critter_ctrl, commander_ctrl):
+	assert isinstance(critter_ctrl, py07710_skirmish_harbinger_monsters.CtrlSkirmisher)
+	assert isinstance(commander_ctrl, py07710_skirmish_harbinger_monsters.CtrlSkirmisher)
 
 	if (critter_ctrl.get_alignment_group() != commander_ctrl.get_alignment_group()): 
 		print("critter_ctrl.get_alignment_group({}) != commander_ctrl.get_alignment_group({}) for {}".format(critter_ctrl.get_alignment_group(), commander_ctrl.get_alignment_group(), critter))
@@ -120,9 +210,70 @@ def warband_clear_incompatible(primary_commander = None, primary_commander_ctrl 
 		if (not compatible):
 			print("PC is not compatible to any commander: {}".format(pc))
 			remove_pc(pc)
+
+	warband_recalc_points()
 	return
+
+def warband_recalc_points():
+	total = 0
+	for pc in toee.game.party:
+		critter_ctrl = critter_is_compatible_with_skirmishing(pc)
+		if not critter_ctrl: continue
+		total += critter_ctrl.get_price()
+	s = skirmish_settings_get()
+	s.points_left = s.points_max - total
+	return total
 
 def remove_pc(pc):
 	pc.obj_remove_from_all_groups(pc)
 	pc.destroy()
+	return
+
+def get_commander_count():
+	result = 0
+	for pc in toee.game.party:
+		if critter_is_commander(pc): result += 1
+	return result
+
+def skirmish_settings_get(recreate = 0):
+	objectStorage = utils_storage.obj_storage_by_id("skirmish_settings")
+	skirmish_settings = objectStorage.get_data("skirmish_settings")
+	if (not skirmish_settings):
+		skirmish_settings = SkirmishSettings()
+		objectStorage.data["skirmish_settings"] = skirmish_settings
+	assert isinstance(skirmish_settings, SkirmishSettings)
+	return skirmish_settings
+
+class SkirmishSettings(object):
+	def __init__(self):
+		self.faction_alignment = toee.ALIGNMENT_LAWFUL_GOOD
+		self.points_max = 100
+		self.points_left = self.points_max
+		return
+
+def menu_show_info_click():
+	skirmish_settings = skirmish_settings_get()
+
+	lines = []
+	lines.append("Faction: {}. ".format(utils_npc.get_alignment_short(skirmish_settings.faction_alignment))\
+	   + "Points: {} left out of {}".format(skirmish_settings.points_left, skirmish_settings.points_max))
+
+	lines.append("")
+	lines.append("Warband:")
+
+	if (1):
+		creatures = []
+		for pc in toee.game.party:
+			ctrl = critter_is_compatible_with_skirmishing(pc)
+			if not ctrl: continue
+			line = "{}, {}. Cost: {}".format(i, ctrl.get_title(), utils_npc.get_alignment_short(ctrl.get_alignment_group()), ctrl.get_price())
+			creatures.append((line, ctrl.get_price()))
+
+		if (creatures):
+			i = 0
+			for critter_tup in sorted(critters, reverse = False, key = lambda kv: kv[1]):
+				lines.append("{}. {}".format(i, critter_tup[0]))
+
+	result = "\n".join(lines)
+	toee.game.alert_show(result, "Close")
 	return

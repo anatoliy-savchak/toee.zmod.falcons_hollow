@@ -1,4 +1,4 @@
-import toee, json, os, sys, inspect, imp, traceback, debug, tpdp
+import toee, json, os, sys, inspect, imp, traceback, debug, tpdp, debugg
 
 def obj_storage(obj):
 	assert isinstance(obj, toee.PyObjHandle)
@@ -81,6 +81,8 @@ class Storage(object):
 			#saveDirName = "\\Current\\dSlot"
 			saveDir = saveDirBase + saveDirName
 			#print(saveDir)
+			if (debugg.DEBUG_STORAGE_PRINT_FOLDER):
+				print("Saving ZMOD storage: {}".format(saveDir))
 			if (not os.path.exists(saveDir)):
 				os.makedirs(saveDir)
 
@@ -105,6 +107,8 @@ class Storage(object):
 		saveDirName = "d" + savegame
 		#saveDirName = "\\Current\\dSlot"
 		saveDir = saveDirBase + saveDirName
+		if (debugg.DEBUG_STORAGE_PRINT_FOLDER):
+			print("Loading ZMOD storage: {}".format(saveDir))
 		ss = Storage()
 		oo = ss.objs
 		oo.clear()
@@ -117,6 +121,7 @@ class Storage(object):
 
 	@staticmethod
 	def reset():
+		print("STORAGE RESET")
 		ss = Storage()
 		oo = ss.objs
 		oo.clear()
@@ -184,6 +189,8 @@ class Storage(object):
 		if (v is None): return 0
 		fileName = n + ".json"
 		filePath = os.path.join(dirname, fileName)
+		if (debugg.DEBUG_STORAGE_PRINT_FILE):
+			print("Saving {}...".format(fileName))
 		#print("saveObjectStorage: filePath {}".format(filePath))
 		#breakp("saveObjectStorage")
 		result = 1
@@ -221,6 +228,8 @@ class Storage(object):
 			mod_cache = dict()
 			local_objects = list()
 			for fileName in files:
+				if (debugg.DEBUG_STORAGE_PRINT_FILE):
+					print("Loading {}...".format(fileName))
 				o = Storage.loadObjectStorage(dirname, fileName, mod_cache)
 				if (not (o is None)):
 					oo[o.name] = o

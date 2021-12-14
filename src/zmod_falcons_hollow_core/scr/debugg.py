@@ -41,3 +41,7 @@ def swap_zmod():
 	iszmod = tpdp.config_get_bool("iszmod")
 	print("iszmod new: {}".format(iszmod))
 	return
+
+
+DEBUG_STORAGE_PRINT_FOLDER = 1
+DEBUG_STORAGE_PRINT_FILE = 1

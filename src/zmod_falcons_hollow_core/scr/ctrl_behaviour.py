@@ -7,6 +7,7 @@ def get_ctrl(id):
 	ctrl = None
 	storage = utils_storage.obj_storage_by_id(id)
 	if (storage):
+		print(storage.data)
 		for t in storage.data.iteritems():
 			if (issubclass(type(t[1]), CtrlBehaviour)):
 				ctrl = t[1]
@@ -129,9 +130,10 @@ class CtrlBehaviour(object):
 		ctrl = cls()
 		if (register):
 			o = utils_storage.obj_storage(npc)
-			o.data[cls.get_name()] = ctrl
+			o.data["ctrl"] = ctrl
 			o.alias = cls.get_alias()
 			o.origin = npc.origin
+			print(o.data)
 		if (call_created):
 			ctrl.created(npc)
 		return npc, ctrl
@@ -150,18 +152,18 @@ class CtrlBehaviour(object):
 		data = utils_storage.obj_storage(npc).data
 		ctrl = None
 		if (cls.get_name() in data):
-			ctrl = data[cls.get_name()]
+			ctrl = data["ctrl"]
 		else:
 			ctrl = cls()
 			ctrl.created(npc)
-			utils_storage.obj_storage(npc).data[cls.get_name()] = ctrl
+			utils_storage.obj_storage(npc).data["ctrl"] = ctrl
 		return ctrl
 
 	@classmethod
 	def get_from_obj(cls, npc):
 		data = utils_storage.obj_storage(npc).data
-		if (cls.get_name() in data):
-			ctrl = data[cls.get_name()]
+		if (["ctrl"] in data):
+			ctrl = data["ctrl"]
 			assert isinstance(ctrl, CtrlBehaviour)
 			return ctrl
 		return
