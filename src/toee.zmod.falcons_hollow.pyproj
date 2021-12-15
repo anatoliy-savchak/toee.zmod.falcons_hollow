@@ -161,6 +161,7 @@
     <Compile Include="zmod_falcons_hollow_core\scr\py06122_cormyr_prompter.py" />
     <Compile Include="zmod_falcons_hollow_core\scr\py06123_event_object_fireplace.py" />
     <Compile Include="zmod_falcons_hollow_core\scr\py06214_doors_autodestroy.py" />
+    <Compile Include="zmod_falcons_hollow_core\scr\py07701_market_square_daemon.py" />
     <Compile Include="zmod_falcons_hollow_core\scr\py07710_skirmish_harbinger_monsters.py" />
     <Compile Include="zmod_falcons_hollow_core\scr\py06631_tomb_encounters.py" />
     <Compile Include="zmod_falcons_hollow_core\scr\py06630_tomb_mound.py" />

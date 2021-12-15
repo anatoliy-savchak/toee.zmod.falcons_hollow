@@ -17,9 +17,6 @@ def SkirmisherStart_OnBuildRadialMenuEntry(attachee, args, evt_obj):
 		root = tpdp.RadialMenuEntryParent("Skirmish")
 		root_id = root.add_child_to_standard(attachee, tpdp.RadialMenuStandardNode.Class)
 
-		party = tpdp.RadialMenuEntryParent("Warband")
-		party_id = party.add_as_child(attachee, root_id)
-
 		# info
 		if (1):
 			skirmish_settings = utils_skirmish.skirmish_settings_get()
@@ -29,7 +26,7 @@ def SkirmisherStart_OnBuildRadialMenuEntry(attachee, args, evt_obj):
 
 		commanders = tpdp.RadialMenuEntryParent("Commanders")
 		if (commanders):
-			commanders_id = commanders.add_as_child(attachee, party_id)
+			commanders_id = commanders.add_as_child(attachee, root_id)
 
 			commander_menu_dict = utils_skirmish.menu_get_commander_dict()
 			for kv in sorted(commander_menu_dict.items(), reverse = False, key = lambda kv: kv[0]):
@@ -42,7 +39,7 @@ def SkirmisherStart_OnBuildRadialMenuEntry(attachee, args, evt_obj):
 
 		creatures = tpdp.RadialMenuEntryParent("Creatures")
 		if (creatures):
-			creatures_id = creatures.add_as_child(attachee, party_id)
+			creatures_id = creatures.add_as_child(attachee, root_id)
 
 			creatures_dict = utils_skirmish.menu_get_compatible_creatures_dict()
 			for kv in creatures_dict.items():
